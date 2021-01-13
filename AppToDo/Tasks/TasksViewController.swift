@@ -15,6 +15,7 @@ class TasksViewController: UIViewController {
     // MARK: 2 List show 2 sections
     var listComplete = [Reminder]()
     var listUncomplete = [Reminder]()
+    var heightKeyboard: CGFloat?
     
     // MARK: - Property
     @IBOutlet weak var tableView: UITableView!
@@ -29,6 +30,18 @@ class TasksViewController: UIViewController {
         tableView.dataSource = self
         
         divDataToTwoListTasks()
+        
+        // MARK: - Notification
+        NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    // MARK: Get Height keyboard
+    @objc func getKeyboardHeightWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            heightKeyboard = keyboardHeight
+        }
     }
     
     // MARK: - Show View.xib
@@ -148,7 +161,7 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showSubViewXib()
         
-        self.viewBottomConstraint.constant = -215.0
+        self.viewBottomConstraint.constant = -heightKeyboard!
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
         })

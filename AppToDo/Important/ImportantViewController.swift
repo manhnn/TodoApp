@@ -13,6 +13,7 @@ class ImportantViewController: UIViewController {
     var listReminder = ReminderStore.SharedInstance.getListReminderOnlyImportantOption()
     
     var listImportant = [Reminder]()
+    var heightKeyboard: CGFloat?
     
     // MARK: - Property
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +28,20 @@ class ImportantViewController: UIViewController {
         tableView.dataSource = self
         
         addDataToListImportant()
+        
+        // MARK: - Notification
+        NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+    
+    // MARK: Get Height keyboard
+    @objc func getKeyboardHeightWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            heightKeyboard = keyboardHeight
+        }
+    }
+    
     // MARK: - Show AddView.xib
     func showSubViewXib() {
         let nib = UINib(nibName: "ImportantSubViewAdd", bundle: nil)
@@ -105,7 +119,7 @@ extension ImportantViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showSubViewXib()
         
-        self.viewBottomConstraint.constant = -215.0
+        self.viewBottomConstraint.constant = -heightKeyboard!
         UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
         })

@@ -29,6 +29,7 @@ class MyDayDetailViewController: UIViewController {
     // MARK: - Property
     var delegate: MyDayDetailViewControllerDelegate?
     var reminder: Reminder!
+    var heightKeyboard: CGFloat?
     
     // MARK: - Detail Reminder
     override func viewDidLoad() {
