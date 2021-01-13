@@ -58,7 +58,6 @@ class MyDayViewController: UIViewController {
         view.trailingAnchor.constraint(equalTo: subViewAddReminder.trailingAnchor).isActive = true
         view.delegate = self
         view.txtTaskWork.delegate = self
-        //view.txtTaskWork.addDoneButtonOnKeyboard()
         view.txtTaskWork.becomeFirstResponder()
     }
     
@@ -79,10 +78,10 @@ class MyDayViewController: UIViewController {
     // MARK: - Select reminder from list add to 2 list where in my day
     func divDataToTwoList() {
         for obj in listReminder {
-            if obj.isComplete == true && obj.isAddToMyDay && (Date() == obj.taskScheduledDate || Date() == obj.taskDueDate) {
+            if obj.isComplete == true && obj.isAddToMyDay && (Date().getDateOnlyToString() == obj.taskScheduledDate.getDateOnlyToString() || Date().getDateOnlyToString() == obj.taskDueDate.getDateOnlyToString()) {
                 listComplete.append(obj)
             }
-            else if obj.isComplete == false && obj.isAddToMyDay && (Date() == obj.taskScheduledDate || Date() == obj.taskDueDate) {
+            else if obj.isComplete == false && obj.isAddToMyDay && (Date().getDateOnlyToString() == obj.taskScheduledDate.getDateOnlyToString() || Date().getDateOnlyToString() == obj.taskDueDate.getDateOnlyToString()) {
                 listUncomplete.append(obj)
             }
         }
@@ -97,14 +96,6 @@ class MyDayViewController: UIViewController {
         formatter.timeStyle = .short
         formatter.dateStyle = .full
         lblDateNow.text = formatter.string(from: currentDateTime)
-    }
-    
-    // MARK: - Function Convert Date to string
-    func convertDateToString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .medium
-        return formatter.string(from: date)
     }
 }
 
@@ -141,7 +132,7 @@ extension MyDayViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 80.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -182,9 +173,8 @@ extension MyDayViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showViewXib()
         
-        
         UIView.animate(withDuration: 0.4, animations: {
-            self.viewBottomConstraint.constant = -self.heightKeyboard!
+            self.viewBottomConstraint.constant = self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -261,115 +251,110 @@ extension MyDayViewController: MyDayDetailViewControllerDelegate {
         present(alert, animated: true)
     }
     
-    // MARK: - Change Icon Button Important
-    func myDayDetailViewController(_ view: MyDayDetailViewController, didTapImportantButtonWith reminder: Reminder) {
-        // Update icon ko can reload data
-        if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
-            listUncomplete[index].isImportant = !listUncomplete[index].isImportant
-            ReminderStore.SharedInstance.updateReminder(reminder: listUncomplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? MyDayTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
+    // MARK: - Change Image Button Important
+    fileprivate func myDayViewControllerChangeImageButtonImportant(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        listUncomplete[index].isImportant = !listUncomplete[index].isImportant
+        ReminderStore.SharedInstance.updateReminder(reminder: listUncomplete[index])
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? MyDayTableViewCell {
+            if reminder.isImportant {
+                cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
             }
-        }
-        else if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
-            listComplete[index].isImportant = !listComplete[index].isImportant
-            ReminderStore.SharedInstance.updateReminder(reminder: listComplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? MyDayTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
+            else {
+                cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
             }
         }
     }
     
+    // MARK: - Change Icon Button Important
+    func myDayDetailViewController(_ view: MyDayDetailViewController, didTapImportantButtonWith reminder: Reminder) {
+        // Update icon ko can reload data
+        if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
+            myDayViewControllerChangeImageButtonImportant(index, reminder, SectionsType.nonecomplete.rawValue)
+        }
+        else if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
+            myDayViewControllerChangeImageButtonImportant(index, reminder, SectionsType.complete.rawValue)
+        }
+    }
+    
     // MARK: - Change Icon Button Success
+    fileprivate func myDayViewControllerChangeImageButtonComplete(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? MyDayTableViewCell {
+            if !reminder.isComplete {
+                cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
+                listComplete.remove(at: index)
+                listUncomplete.append(reminder)
+                tableView.reloadData()
+            }
+            else {
+                cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
+                listUncomplete.remove(at: index)
+                listComplete.append(reminder)
+                tableView.reloadData()
+            }
+        }
+    }
+    
     func myDayDetailViewController(_ view: MyDayDetailViewController, didTapCompleteButtonWith reminder: Reminder) {
-        
         if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
             listUncomplete[index].isComplete = !listUncomplete[index].isComplete
             ReminderStore.SharedInstance.updateReminder(reminder: listUncomplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? MyDayTableViewCell {
-                if !reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
-                    listComplete.remove(at: index)
-                    listUncomplete.append(reminder)
-                    tableView.reloadData()
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
-                    listUncomplete.remove(at: index)
-                    listComplete.append(reminder)
-                    tableView.reloadData()
-                }
-            }
+            myDayViewControllerChangeImageButtonComplete(index, reminder, SectionsType.nonecomplete.rawValue)
         }
         else if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
             listComplete[index].isComplete = !listComplete[index].isComplete
             ReminderStore.SharedInstance.updateReminder(reminder: listComplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
-                if !reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
-                    listComplete.remove(at: index)
-                    listUncomplete.append(reminder)
-                    tableView.reloadData()
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
-                    listUncomplete.remove(at: index)
-                    listComplete.append(reminder)
-                    tableView.reloadData()
-                }
-            }
+            myDayViewControllerChangeImageButtonComplete(index, reminder, SectionsType.complete.rawValue)
         }
     }
+    
     func myDayDetailViewController(_ view: MyDayDetailViewController, didTapSaveButtonWith reminder: Reminder) {
         if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
-                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+                cell.lblDateTime.text = reminder.taskDueDate.toString()
+                cell.setupData(reminder)
             }
         }
         
         else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
-                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+                cell.lblDateTime.text = reminder.taskDueDate.toString()
+                cell.setupData(reminder)
             }
         }
     }
 }
 // MARK: - Extension MyDayTablewViewCell
 extension MyDayViewController: MyDayTableViewCellDelegate {
+    fileprivate func mydayTableViewCellChangeImageButtonImportant(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? MyDayTableViewCell {
+            if reminder.isImportant {
+                cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
+            }
+            else {
+                cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
+            }
+        }
+    }
+    
     func myDayTableViewCell(_ view: MyDayTableViewCell, didTapImportantButtonWith reminder: Reminder) {
         reminder.isImportant = !reminder.isImportant
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
-        // Update icon ko can reload data
         if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}){
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? MyDayTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
-            }
+            myDayViewControllerChangeImageButtonImportant(index, reminder, SectionsType.complete.rawValue)
         }
-        
         else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? MyDayTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
+            myDayViewControllerChangeImageButtonImportant(index, reminder, SectionsType.nonecomplete.rawValue)
+        }
+    }
+    
+    fileprivate func changeImageButtonComplete(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? MyDayTableViewCell{
+            if reminder.isComplete {
+                cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
+            }
+            else {
+                cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
             }
         }
     }
@@ -378,29 +363,13 @@ extension MyDayViewController: MyDayTableViewCellDelegate {
         reminder.isComplete = !reminder.isComplete
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
-        // Update icon ko can fai reload data
         if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? MyDayTableViewCell{
-                if reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
-                }
-            }
+            changeImageButtonComplete(index, reminder, SectionsType.nonecomplete.rawValue)
         }
-       
         if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? MyDayTableViewCell{
-                if reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
-                }
-            }
+            changeImageButtonComplete(index, reminder, SectionsType.complete.rawValue)
         }
-        
+
         if reminder.isComplete {
             if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
                 listUncomplete.remove(at: index)
@@ -449,14 +418,14 @@ extension MyDayViewController: MyDayAddViewDelegate {
 
 // MARK: - Extension MyDaySubMenuView when Sorting
 extension MyDayViewController: MyDaySubMenuViewDelegate {
-    fileprivate func setupReminderToListShow(_ listSortDataByName: [Reminder]) {
+    fileprivate func setupReminderToListShow(_ listSortData: [Reminder]) {
         listComplete.removeAll()
         listUncomplete.removeAll()
-        for obj in listSortDataByName  {
-            if obj.isComplete == true && obj.isAddToMyDay && Date() == obj.taskScheduledDate {
+        for obj in listSortData {
+            if obj.isComplete == true && obj.isAddToMyDay && Date().getDateOnlyToString() == obj.taskScheduledDate.getDateOnlyToString() {
                 listComplete.append(obj)
             }
-            else if obj.isComplete == false && obj.isAddToMyDay && Date() == obj.taskScheduledDate{
+            else if obj.isComplete == false && obj.isAddToMyDay && Date().getDateOnlyToString() == obj.taskScheduledDate.getDateOnlyToString() {
                 listUncomplete.append(obj)
             }
         }

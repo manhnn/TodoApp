@@ -16,7 +16,7 @@ protocol ImportantDetailViewControllerDelegate {
     func importantDetailViewController(_ view: ImportantDetailViewController, didTapSaveButtonWith reminder: Reminder)
 }
 
-class ImportantDetailViewController: UIViewController {
+class ImportantDetailViewController: UIViewController, UITextViewDelegate {
     // MARK: - UI
     @IBOutlet weak var btnComplete: UIButton!
     @IBOutlet weak var btnImportant: UIButton!
@@ -38,7 +38,7 @@ class ImportantDetailViewController: UIViewController {
 
         self.lblWork.text = reminder.taskWorkName
         if reminder.taskDueDate != Date(timeIntervalSince1970: 0) {
-            self.btnDueDate.setTitle("Due Date: \(convertDateToString(date: reminder.taskDueDate))", for: .normal)
+            self.btnDueDate.setTitle("Due Date: \(reminder.taskDueDate.toString())", for: .normal)
         }
         else {
             btnDueDate.setTitle("Due Date:", for: .normal)
@@ -66,7 +66,9 @@ class ImportantDetailViewController: UIViewController {
             btnAddToMyDay.setTitleColor(.black, for: .normal)
         }
         
+        txtNote.delegate = self
         txtNote.text = reminder.txtNote
+        txtNote.addDoneButtonOnKeyboard()
     }
     
     // MARK: - Function set color
@@ -74,23 +76,15 @@ class ImportantDetailViewController: UIViewController {
         if reminder.taskDueDate == Date(timeIntervalSince1970: 0) {
             btnDueDate.setTitleColor(.systemBlue, for: .normal)
         }
-        else if reminder.taskDueDate < Date() {
-            btnDueDate.setTitleColor(.systemRed, for: .normal)
-        }
         else if reminder.taskDueDate > Date() {
             btnDueDate.setTitleColor(.black, for: .normal)
         }
-        else {
-            btnDueDate.setTitleColor(.systemBlue, for: .normal)
+        else if reminder.taskDueDate.getDateOnlyToString() == Date().getDateOnlyToString() {
+            btnDueDate.setTitleColor(.systemPurple, for: .normal)
         }
-    }
-    
-    // MARK: - Convert Date to string
-    func convertDateToString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .medium
-        return formatter.string(from: date)
+        else {
+            btnDueDate.setTitleColor(.systemRed, for: .normal)
+        }
     }
     
     // MARK: - Buttons Action
@@ -144,12 +138,11 @@ class ImportantDetailViewController: UIViewController {
                 }
                 if datePicker.isHidden == false {
                     reminder.taskDueDate = datePicker.date
+                    btnDueDate.setTitle(reminder.taskDueDate.toString(), for: .normal)
+                    setColorForDueDateButton()
                 }
                 ReminderStore.SharedInstance.updateReminder(reminder: reminder)
                 delegate?.importantDetailViewController(self, didTapSaveButtonWith: reminder)
-                
-                btnDueDate.setTitle(convertDateToString(date: reminder.taskDueDate), for: .normal)
-                setColorForDueDateButton()
                 
                 let yesAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
                 alertSuccess.addAction(yesAction)

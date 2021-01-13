@@ -60,7 +60,7 @@ class ReminderStore {
         return listReminder
     }
     
-    func getListReminderHaveDueDate() ->Array<Reminder> {
+    func getListReminderHaveDueDate() -> Array<Reminder> {
         let realm = try! Realm()
         let listResult = realm.objects(RLMReminder.self).filter("isComplete == false") // filter taskScheduled.isEmpty
         var listReminder = [Reminder]()

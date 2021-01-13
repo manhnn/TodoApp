@@ -80,14 +80,6 @@ class ImportantViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    // MARK: - Function convert Date to string
-    func convertDateToString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .medium
-        return formatter.string(from: date)
-    }
 }
 
 // MARK: - UITableViewDataSource 
@@ -106,7 +98,7 @@ extension ImportantViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 80.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -127,7 +119,7 @@ extension ImportantViewController: UITableViewDelegate, UITextFieldDelegate {
         showSubViewXib()
         
         UIView.animate(withDuration: 0.4, animations: {
-            self.viewBottomConstraint.constant = -self.heightKeyboard!
+            self.viewBottomConstraint.constant = self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -215,7 +207,8 @@ extension ImportantViewController: ImportantDetailViewControllerDelegate {
     func importantDetailViewController(_ view: ImportantDetailViewController, didTapSaveButtonWith reminder: Reminder) {
         if let index = self.listImportant.firstIndex(where: {$0.id == reminder.id}) {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? ImportantTableViewCell {
-                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+                cell.lblDateTime.text = reminder.taskDueDate.toString()
+                cell.setupData(reminder)
             }
         }
     }
@@ -223,8 +216,7 @@ extension ImportantViewController: ImportantDetailViewControllerDelegate {
 
 // MARK: - Extension ImportantTableViewCell
 extension ImportantViewController: ImportantTableViewCellDelegate {
-    func importantTableViewCell(_ view: ImportantTableViewCell, didTapCompleteButtonWith reminder: Reminder) {
-        reminder.isComplete = !reminder.isComplete
+    fileprivate func importantViewControllerUpdateRemoveAndDeleteRowsWith(_ reminder: Reminder) {
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
         if let index = listImportant.firstIndex(where: {$0.id == reminder.id}) {
@@ -233,14 +225,14 @@ extension ImportantViewController: ImportantTableViewCellDelegate {
         }
     }
     
+    func importantTableViewCell(_ view: ImportantTableViewCell, didTapCompleteButtonWith reminder: Reminder) {
+        reminder.isComplete = !reminder.isComplete
+        importantViewControllerUpdateRemoveAndDeleteRowsWith(reminder)
+    }
+    
     func importantTableViewCell(_ view: ImportantTableViewCell, didTapImportantButtonWith reminder: Reminder) {
         reminder.isImportant = !reminder.isImportant
-        ReminderStore.SharedInstance.updateReminder(reminder: reminder)
-        
-        if let index = listImportant.firstIndex(where: {$0.id == reminder.id}) {
-            listImportant.remove(at: index)
-            tableView.deleteRows(at: [IndexPath.init(row: index, section: 0)], with: .top)
-        }
+        importantViewControllerUpdateRemoveAndDeleteRowsWith(reminder)
     }
 }
 

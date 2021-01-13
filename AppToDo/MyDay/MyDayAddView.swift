@@ -38,8 +38,8 @@ class MyDayAddView: UIView, UITextFieldDelegate {
         datePicker.isHidden = false
         
         let formatter = DateFormatter()
-        formatter.timeStyle = .full
-        formatter.dateStyle = .full
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
         newReminder.taskDueDate = datePicker.date
     }
     
@@ -47,19 +47,24 @@ class MyDayAddView: UIView, UITextFieldDelegate {
         txtTaskWork.delegate = self
         newReminder.taskWorkName = txtTaskWork.text!
         newReminder.taskScheduledDate = Date()
+        if setDueDateButton.isHidden && !datePicker.isHidden {
+            newReminder.taskDueDate = datePicker.date
+        }
+        
         if  newReminder.taskWorkName != "" {
             ReminderStore.SharedInstance.addReminder(newReminder: newReminder)
-            
             self.delegate?.myDayAddView(self, didAddItemSuccessWith: newReminder)
         }
         else {
             self.delegate?.myDayAddViewDidAddItemFail(self)
         }
+        
         txtTaskWork.text = ""
         setDueDateButton.isHidden = false
         datePicker.isHidden = true
         self.txtTaskWork.endEditing(true)
     }
+    
     @IBAction func doneButtonAction(_ sender: Any) {
         delegate?.myDayAddViewDidTapDoneButtonOnKeyboard(self)
         self.txtTaskWork.resignFirstResponder()

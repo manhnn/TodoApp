@@ -36,7 +36,7 @@ class ImportantAddView: UIView, UITextFieldDelegate {
         
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-        formatter.dateStyle = .long
+        formatter.dateStyle = .medium
         newReminder.taskDueDate = datePicker.date
     }
     

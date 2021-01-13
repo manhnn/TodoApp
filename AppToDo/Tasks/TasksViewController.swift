@@ -87,15 +87,6 @@ class TasksViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-    }
-    
-    // MARK: - Function Convert Date to string
-    func convertDateToString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .medium
-        return formatter.string(from: date)
     }
 }
 
@@ -132,7 +123,7 @@ extension TasksViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 80.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -169,7 +160,7 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
         showSubViewXib()
         
         UIView.animate(withDuration: 0.4, animations: {
-            self.viewBottomConstraint.constant = -self.heightKeyboard!
+            self.viewBottomConstraint.constant = self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -240,71 +231,59 @@ extension TasksViewController: TasksDetailViewControllerDelegate {
     }
     
     // MARK: - Change Icon Button Important
+    fileprivate func tasksViewControllerChangeImageButtonImportant(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? TasksTableViewCell {
+            if reminder.isImportant {
+                cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
+            }
+            else {
+                cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
+            }
+        }
+    }
+    
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapImportantButtonWith reminder: Reminder) {
         // Update icon ko can reload data
         if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
             listUncomplete[index].isImportant = !listUncomplete[index].isImportant
             ReminderStore.SharedInstance.updateReminder(reminder: listUncomplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
-            }
+            tasksViewControllerChangeImageButtonImportant(index, reminder, SectionsType.nonecomplete.rawValue)
         }
         else if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
             listComplete[index].isImportant = !listComplete[index].isImportant
             ReminderStore.SharedInstance.updateReminder(reminder: listComplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
-            }
+            tasksViewControllerChangeImageButtonImportant(index, reminder, SectionsType.complete.rawValue)
         }
     }
     
     // MARK: - Change Icon Button Complete
+    fileprivate func tasksViewControllerChangeImageButtonComplete(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? TasksTableViewCell {
+            if !reminder.isComplete {
+                cell.btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
+                listComplete.remove(at: index)
+                listUncomplete.append(reminder)
+                tableView.reloadData()
+            }
+            else {
+                cell.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
+                listUncomplete.remove(at: index)
+                listComplete.append(reminder)
+                tableView.reloadData()
+            }
+        }
+    }
+    
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapCompleteButtonWith reminder: Reminder) {
         if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
             listUncomplete[index].isComplete = !listUncomplete[index].isComplete
             ReminderStore.SharedInstance.updateReminder(reminder: listUncomplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
-                if !reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
-                    listComplete.remove(at: index)
-                    listUncomplete.append(reminder)
-                    tableView.reloadData()
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
-                    listUncomplete.remove(at: index)
-                    listComplete.append(reminder)
-                    tableView.reloadData()
-                }
-            }
+            tasksViewControllerChangeImageButtonComplete(index, reminder, SectionsType.nonecomplete.rawValue)
         } 
         else if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
             listComplete[index].isComplete = !listComplete[index].isComplete
             ReminderStore.SharedInstance.updateReminder(reminder: listComplete[index])
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
-                if !reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
-                    listComplete.remove(at: index)
-                    listUncomplete.append(reminder)
-                    tableView.reloadData()
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
-                    listUncomplete.remove(at: index)
-                    listComplete.append(reminder)
-                    tableView.reloadData()
-                }
-            }
+            tasksViewControllerChangeImageButtonComplete(index, reminder, SectionsType.complete.rawValue)
         }
     }
     
@@ -319,13 +298,15 @@ extension TasksViewController: TasksDetailViewControllerDelegate {
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapSaveButtonWith reminder: Reminder) {
         if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
-                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+                cell.lblDateTime.text = reminder.taskDueDate.toString()
+                cell.setupData(reminder)
             }
         }
         
         else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
-                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+                cell.lblDateTime.text = reminder.taskDueDate.toString()
+                cell.setupData(reminder)
             }
         }
     }
@@ -333,30 +314,38 @@ extension TasksViewController: TasksDetailViewControllerDelegate {
 
 // MARK: - Extension TasksTableViewCell
 extension TasksViewController: TasksTableViewCellDelegate {
+    fileprivate func tasksTableViewCellChangeImageImportant(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? TasksTableViewCell {
+            if reminder.isImportant {
+                cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
+            }
+            else {
+                cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
+            }
+        }
+    }
+    
     func tasksTableViewCell(_ view: TasksTableViewCell, didTapImportantButtonWith reminder: Reminder) {
         reminder.isImportant = !reminder.isImportant
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
         // Update icon ko can reload data
         if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
-            }
+            tasksTableViewCellChangeImageImportant(index, reminder, SectionsType.complete.rawValue)
         }
         
         else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
-                if reminder.isImportant {
-                    cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
-                }
-                else {
-                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-                }
+            tasksTableViewCellChangeImageImportant(index, reminder, SectionsType.nonecomplete.rawValue)
+        }
+    }
+    
+    fileprivate func tasksTableViewCellChangeImageComplete(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? TasksTableViewCell{
+            if reminder.isComplete {
+                cell.btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
+            }
+            else {
+                cell.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
             }
         }
     }
@@ -365,27 +354,12 @@ extension TasksViewController: TasksTableViewCellDelegate {
         reminder.isComplete = !reminder.isComplete
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
-        // Update icon ko can fai reload data
         if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell{
-                if reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
-                }
-            }
+            tasksTableViewCellChangeImageComplete(index, reminder, SectionsType.nonecomplete.rawValue)
         }
        
         if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
-            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell{
-                if reminder.isComplete {
-                    cell.btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
-                }
-                else {
-                    cell.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
-                }
-            }
+            tasksTableViewCellChangeImageComplete(index, reminder, SectionsType.complete.rawValue)
         }
         
         if reminder.isComplete {
@@ -438,10 +412,10 @@ extension TasksViewController: TasksMenuViewDelegate {
         listComplete.removeAll()
         listUncomplete.removeAll()
         for obj in listSortDataByDateTime {
-            if obj.isComplete == true {
+            if obj.isComplete {
                 listComplete.append(obj)
             }
-            else if obj.isComplete == false {
+            else {
                 listUncomplete.append(obj)
             }
         }
