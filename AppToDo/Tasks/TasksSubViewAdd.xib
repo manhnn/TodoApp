@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rb9-Vl-cGO" customClass="TasksAddView" customModule="AppToDo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzK-oH-q2w">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add task" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cD-9b-Kof">
+                            <rect key="frame" x="15" y="5.5" width="324" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPx-Aa-N7X">
+                            <rect key="frame" x="354" y="0.0" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="HPx-Aa-N7X" secondAttribute="height" multiplier="1:1" id="RRb-hf-rAI"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                            <state key="normal" image="arrow-upblue"/>
+                            <connections>
+                                <action selector="btnDidTapAddReminder:" destination="rb9-Vl-cGO" eventType="touchUpInside" id="Tdc-eM-AeC"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="3cD-9b-Kof" firstAttribute="centerY" secondItem="nzK-oH-q2w" secondAttribute="centerY" id="4FE-cG-nnu"/>
+                        <constraint firstItem="HPx-Aa-N7X" firstAttribute="top" secondItem="nzK-oH-q2w" secondAttribute="top" id="KjO-CF-3mq"/>
+                        <constraint firstItem="3cD-9b-Kof" firstAttribute="leading" secondItem="nzK-oH-q2w" secondAttribute="leading" constant="15" id="fjh-Pg-WMM"/>
+                        <constraint firstAttribute="trailing" secondItem="HPx-Aa-N7X" secondAttribute="trailing" constant="15" id="h9f-9I-quW"/>
+                        <constraint firstAttribute="bottom" secondItem="HPx-Aa-N7X" secondAttribute="bottom" id="hRe-sR-RHu"/>
+                        <constraint firstItem="HPx-Aa-N7X" firstAttribute="leading" secondItem="3cD-9b-Kof" secondAttribute="trailing" constant="15" id="mEA-AY-njq"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pP-Ty-2Wi">
+                    <rect key="frame" x="0.0" y="45" width="414" height="45"/>
+                    <subviews>
+                        <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TO9-zX-gJn">
+                            <rect key="frame" x="75" y="0.0" width="269" height="45"/>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                <!--1970-01-01 11:00:00 +0000-->
+                            </date>
+                            <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                <!--2037-12-31 11:00:00 +0000-->
+                            </date>
+                            <locale key="locale" localeIdentifier="en"/>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0S-xY-8KD">
+                            <rect key="frame" x="50" y="0.0" width="314" height="45"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="imageEdgeInsets" minX="30" minY="5" maxX="190" maxY="5"/>
+                            <state key="normal" title="Setup due date for reminder" image="notificationblue">
+                                <color key="titleColor" systemColor="labelColor"/>
+                            </state>
+                            <connections>
+                                <action selector="setDueDateButtonAction:" destination="rb9-Vl-cGO" eventType="touchUpInside" id="dEm-8G-1hU"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="g0S-xY-8KD" firstAttribute="top" secondItem="1pP-Ty-2Wi" secondAttribute="top" id="3H8-ao-GxC"/>
+                        <constraint firstItem="TO9-zX-gJn" firstAttribute="top" secondItem="1pP-Ty-2Wi" secondAttribute="top" id="5lC-v4-VeT"/>
+                        <constraint firstAttribute="bottom" secondItem="TO9-zX-gJn" secondAttribute="bottom" id="73N-7z-tLp"/>
+                        <constraint firstAttribute="trailing" secondItem="g0S-xY-8KD" secondAttribute="trailing" constant="50" id="8q6-Qp-ysG"/>
+                        <constraint firstItem="TO9-zX-gJn" firstAttribute="leading" secondItem="1pP-Ty-2Wi" secondAttribute="leading" constant="75" id="BKc-R6-0nk"/>
+                        <constraint firstItem="g0S-xY-8KD" firstAttribute="leading" secondItem="1pP-Ty-2Wi" secondAttribute="leading" constant="50" id="LNU-cb-0oq"/>
+                        <constraint firstItem="TO9-zX-gJn" firstAttribute="width" secondItem="1pP-Ty-2Wi" secondAttribute="width" multiplier="0.65" id="My6-5W-vxU"/>
+                        <constraint firstAttribute="bottom" secondItem="g0S-xY-8KD" secondAttribute="bottom" id="tqG-Ui-xTf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="r4f-gA-O2g"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1pP-Ty-2Wi" secondAttribute="trailing" id="05k-YM-A6J"/>
+                <constraint firstAttribute="trailing" secondItem="nzK-oH-q2w" secondAttribute="trailing" id="70q-74-D6r"/>
+                <constraint firstItem="1pP-Ty-2Wi" firstAttribute="leading" secondItem="rb9-Vl-cGO" secondAttribute="leading" id="HxP-5x-Fyg"/>
+                <constraint firstItem="nzK-oH-q2w" firstAttribute="leading" secondItem="rb9-Vl-cGO" secondAttribute="leading" id="Ivo-RE-g6L"/>
+                <constraint firstItem="nzK-oH-q2w" firstAttribute="top" secondItem="rb9-Vl-cGO" secondAttribute="top" id="Pbc-jW-LJB"/>
+                <constraint firstItem="nzK-oH-q2w" firstAttribute="height" secondItem="rb9-Vl-cGO" secondAttribute="height" multiplier="0.5" id="Yjy-2l-dVt"/>
+                <constraint firstAttribute="height" constant="90" id="cda-GV-gt7"/>
+                <constraint firstItem="1pP-Ty-2Wi" firstAttribute="height" secondItem="rb9-Vl-cGO" secondAttribute="height" multiplier="0.5" id="gfK-86-3Ev"/>
+                <constraint firstAttribute="bottom" secondItem="1pP-Ty-2Wi" secondAttribute="bottom" id="pQo-al-Cry"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="datePicker" destination="TO9-zX-gJn" id="Kfh-Tw-24R"/>
+                <outlet property="setDueDateButton" destination="g0S-xY-8KD" id="ZEG-BJ-Yej"/>
+                <outlet property="txtTaskWork" destination="3cD-9b-Kof" id="YTz-ZE-mfN"/>
+            </connections>
+            <point key="canvasLocation" x="0.0" y="6.6964285714285712"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow-upblue" width="512" height="512"/>
+        <image name="notificationblue" width="500" height="500"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

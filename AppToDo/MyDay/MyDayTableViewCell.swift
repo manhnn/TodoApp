@@ -1,0 +1,70 @@
+//
+//  MyDayTableViewCell.swift
+//  AppToDo
+//
+//  Created by Nguyen Manh on 05/01/2021.
+//
+
+import UIKit
+
+protocol MyDayTableViewCellDelegate {
+    func myDayTableViewCell(_ view: MyDayTableViewCell, didTapCompleteButtonWith reminder: Reminder)
+    func myDayTableViewCell(_ view: MyDayTableViewCell, didTapImportantButtonWith reminder: Reminder)
+}
+
+class MyDayTableViewCell: UITableViewCell {
+
+    // MARK: - UI
+    @IBOutlet weak var lblWork: UILabel!
+    @IBOutlet weak var lblDateTime: UILabel!
+    @IBOutlet weak var btnImportant: UIButton!
+    @IBOutlet weak var btnComplete: UIButton!
+    @IBOutlet weak var cellView: UIView!
+    @IBOutlet weak var subView: UIView!
+    
+    var delegate: MyDayTableViewCellDelegate?
+    var reminder: Reminder?
+    var myDay: MyDayViewController?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    // MARK: - Custom Cell
+    func setupData(_ cell: Reminder) {
+        self.lblWork.text = cell.taskWorkName
+        self.lblDateTime.text = cell.taskDueDate
+        
+        if cell.isImportant {
+            btnImportant.setImage(UIImage(named: "star"), for: .normal)
+        }
+        else {
+            btnImportant.setImage(UIImage(named: "starred"), for: .normal)
+        }
+        
+        if cell.isComplete {
+            self.btnComplete.setImage(UIImage(named: "check"), for: .normal)
+        }
+        else {
+            self.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
+        }
+        
+        self.backgroundColor = .white
+        self.cellView.backgroundColor = .white
+        self.subView.backgroundColor = .white
+        self.cellView.layer.cornerRadius = self.cellView.frame.height / 5
+    }
+    
+    // MARK: - Buttons Action
+    @IBAction func btnSuccessAction(_ sender: Any) {
+        delegate?.myDayTableViewCell(self, didTapCompleteButtonWith: reminder!)
+    }
+    
+    @IBAction func btnImportantAction(_ sender: Any) {
+        delegate?.myDayTableViewCell(self, didTapImportantButtonWith: reminder!)
+    }
+}
