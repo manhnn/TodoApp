@@ -28,7 +28,6 @@ class PlanViewController: UIViewController {
         tableView.dataSource = self
         
         addDataToListImportant()
-        // MARK: - Notification
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
@@ -36,8 +35,7 @@ class PlanViewController: UIViewController {
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            heightKeyboard = keyboardHeight
+            heightKeyboard = keyboardRectangle.height
         }
     }
     
@@ -73,7 +71,7 @@ class PlanViewController: UIViewController {
     
     func addDataToListImportant() {
         for obj in listReminder {
-            if !obj.taskDueDate.isEmpty {
+            if obj.taskDueDate != Date(timeIntervalSince1970: 0) {
                 listPlan.append(obj)
             }
         }
@@ -82,9 +80,17 @@ class PlanViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    // MARK: - Function convert Date to string
+    func convertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
+    }
 }
 
-// MARK: - Custom TableView
+// MARK: - UITableViewDataSource 
 extension PlanViewController: UITableViewDataSource {
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,8 +125,8 @@ extension PlanViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showSubViewXib()
         
-        self.viewBottomConstraint.constant = -heightKeyboard!
         UIView.animate(withDuration: 0.4, animations: {
+            self.viewBottomConstraint.constant = -self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -167,7 +173,6 @@ extension PlanViewController: PlanDetailViewControllerDelegate {
                 listPlan.remove(at: index)
                 tableView.reloadData()
             }
-            
         }
         let cancelAction = UIAlertAction(title: "No", style: .default, handler: nil)
         alert.addAction(deleteAction)
@@ -198,6 +203,14 @@ extension PlanViewController: PlanDetailViewControllerDelegate {
         reminder.isAddToMyDay = !reminder.isAddToMyDay
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
     }
+    
+    func planDetailViewController(_ view: PlanDetailViewController, didTapSaveButtonWith reminder: Reminder) {
+        if let index = self.listPlan.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? PlanTableViewCell {
+                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+            }
+        }
+    }
 }
 
 // MARK: - Extension ImportantTableViewCell
@@ -225,8 +238,8 @@ extension PlanViewController: PlanAddViewDelegate {
         tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .middle)
         tableView.endUpdates()
         
-        self.viewBottomConstraint.constant = 0.0
         UIView.animate(withDuration: 0.75, animations: {
+            self.viewBottomConstraint.constant = 0.0
             self.view.layoutIfNeeded()
         })
         
@@ -239,18 +252,22 @@ extension PlanViewController: PlanAddViewDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func planAddViewDidTapDoneButtonOnKeyboard(_ view: PlanAddView) {
+        subViewAddXib.isHidden = true
+        btnHiddenSubView.isHidden = false
+    }
 }
 
 extension PlanViewController: PlanMenuViewDelegate {
-    func planMenuViewDidTapSortByNameButton(_ view: PlanMenuView) {
-        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+    fileprivate func setupReminderToListShow(_ listSortDataByImportant: [Reminder]) {
         listPlan.removeAll()
         tableView.reloadData()
         
         var numberRow = 0
-        for index in 0...listSortDataByName.count - 1 {
-            if !listSortDataByName[index].taskDueDate.isEmpty && !listSortDataByName[index].isComplete{
-                listPlan.append(listSortDataByName[index])
+        for obj in listSortDataByImportant {
+            if obj.taskDueDate != Date(timeIntervalSince1970: 0) && !obj.isComplete {
+                listPlan.append(obj)
                 tableView.beginUpdates()
                 tableView.insertRows(at: [IndexPath.init(row: numberRow, section: 0)], with: .left)
                 numberRow += 1
@@ -258,41 +275,20 @@ extension PlanViewController: PlanMenuViewDelegate {
             }
         }
         subMenuViewXib.isHidden = true
+    }
+    
+    func planMenuViewDidTapSortByNameButton(_ view: PlanMenuView) {
+        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+        setupReminderToListShow(listSortDataByName)
     }
     
     func planMenuViewDidTapSortByDateTimeButton(_ view: PlanMenuView) {
         let listSortDataByDateTime = ReminderStore.SharedInstance.getListReminderSortByDateTime()
-        listPlan.removeAll()
-        tableView.reloadData()
-        
-        var numberRow = 0
-        for index in 0...listSortDataByDateTime.count - 1 {
-            if !listSortDataByDateTime[index].taskDueDate.isEmpty && !listSortDataByDateTime[index].isComplete{
-                listPlan.append(listSortDataByDateTime[index])
-                tableView.beginUpdates()
-                tableView.insertRows(at: [IndexPath.init(row: numberRow, section: 0)], with: .left)
-                numberRow += 1
-                tableView.endUpdates()
-            }
-        }
-        subMenuViewXib.isHidden = true
+        setupReminderToListShow(listSortDataByDateTime)
     }
     
     func planMenuViewDidTapSortByImportantButton(_ view: PlanMenuView) {
         let listSortDataByImportant = ReminderStore.SharedInstance.getListReminderSortByImportant()
-        listPlan.removeAll()
-        tableView.reloadData()
-        
-        var numberRow = 0
-        for index in 0...listSortDataByImportant.count - 1 {
-            if !listSortDataByImportant[index].taskDueDate.isEmpty && !listSortDataByImportant[index].isComplete{
-                listPlan.append(listSortDataByImportant[index])
-                tableView.beginUpdates()
-                tableView.insertRows(at: [IndexPath.init(row: numberRow, section: 0)], with: .left)
-                numberRow += 1
-                tableView.endUpdates()
-            }
-        }
-        subMenuViewXib.isHidden = true
+        setupReminderToListShow(listSortDataByImportant)
     }
 }

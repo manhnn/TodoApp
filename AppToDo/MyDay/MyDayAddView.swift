@@ -10,6 +10,7 @@ import UIKit
 protocol MyDayAddViewDelegate {
     func myDayAddView(_ view: MyDayAddView, didAddItemSuccessWith reminder: Reminder)
     func myDayAddViewDidAddItemFail(_ view: MyDayAddView)
+    func myDayAddViewDidTapDoneButtonOnKeyboard(_ view: MyDayAddView)
 }
 
 class MyDayAddView: UIView, UITextFieldDelegate {
@@ -19,7 +20,7 @@ class MyDayAddView: UIView, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var setDueDateButton: UIButton!
     
-    var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: "", taskDueDate: "", isComplete: false, isImportant: false, isAddToMyDay: true, txtNote: "Add notes...")
+    var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: false, isAddToMyDay: true, txtNote: "Add notes...")
     public var delegate: MyDayAddViewDelegate?
 
     // MARK: - Buttons Action
@@ -28,20 +29,24 @@ class MyDayAddView: UIView, UITextFieldDelegate {
         return true
     }
     
+    override func awakeFromNib() {
+        //print("load")
+    }
+    
     @IBAction func setDueDateButtonAction(_ sender: Any) {
         setDueDateButton.isHidden = true
         datePicker.isHidden = false
         
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .long
-        newReminder.taskDueDate = formatter.string(from: datePicker.date)
+        formatter.timeStyle = .full
+        formatter.dateStyle = .full
+        newReminder.taskDueDate = datePicker.date
     }
     
     @IBAction func btnDidTapAddReminder(_ sender: Any) {
         txtTaskWork.delegate = self
         newReminder.taskWorkName = txtTaskWork.text!
-        newReminder.taskScheduledDate = getDateNow()
+        newReminder.taskScheduledDate = Date()
         if  newReminder.taskWorkName != "" {
             ReminderStore.SharedInstance.addReminder(newReminder: newReminder)
             
@@ -55,12 +60,8 @@ class MyDayAddView: UIView, UITextFieldDelegate {
         datePicker.isHidden = true
         self.txtTaskWork.endEditing(true)
     }
-    
-    func getDateNow() -> String {
-        let currentDateTime = Date()
-        let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .long
-        return formatter.string(from: currentDateTime)
+    @IBAction func doneButtonAction(_ sender: Any) {
+        delegate?.myDayAddViewDidTapDoneButtonOnKeyboard(self)
+        self.txtTaskWork.resignFirstResponder()
     }
 }

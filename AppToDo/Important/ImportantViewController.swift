@@ -37,8 +37,7 @@ class ImportantViewController: UIViewController {
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            heightKeyboard = keyboardHeight
+            heightKeyboard = keyboardRectangle.height
         }
     }
     
@@ -73,17 +72,25 @@ class ImportantViewController: UIViewController {
     }
     
     func addDataToListImportant() {
-        for index in 0..<listReminder.count {
-            listImportant.append(listReminder[index])
+        for obj in listReminder {
+            listImportant.append(obj)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    // MARK: - Function convert Date to string
+    func convertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
+    }
 }
 
-// MARK: - Custom TableView
+// MARK: - UITableViewDataSource 
 extension ImportantViewController: UITableViewDataSource {
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,8 +126,8 @@ extension ImportantViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showSubViewXib()
         
-        self.viewBottomConstraint.constant = -heightKeyboard!
         UIView.animate(withDuration: 0.4, animations: {
+            self.viewBottomConstraint.constant = -self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -203,6 +210,15 @@ extension ImportantViewController: ImportantDetailViewControllerDelegate {
         reminder.isAddToMyDay = !reminder.isAddToMyDay
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
     }
+    
+    // MARK: - Change color for label in cell
+    func importantDetailViewController(_ view: ImportantDetailViewController, didTapSaveButtonWith reminder: Reminder) {
+        if let index = self.listImportant.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? ImportantTableViewCell {
+                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+            }
+        }
+    }
 }
 
 // MARK: - Extension ImportantTableViewCell
@@ -236,8 +252,8 @@ extension ImportantViewController: ImportantAddViewDelegate {
         tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .middle)
         tableView.endUpdates()
         
-        self.viewBottomConstraint.constant = 0
         UIView.animate(withDuration: 0.75, animations: {
+            self.viewBottomConstraint.constant = 0
             self.view.layoutIfNeeded()
         })
         
@@ -250,11 +266,15 @@ extension ImportantViewController: ImportantAddViewDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func importantAddViewDidTapDoneButtonOnKeyboard(_ view: ImportantAddView) {
+        subViewAddXib.isHidden = true
+        btnHiddenSubView.isHidden = false
+    }
 }
 
 extension ImportantViewController: ImportantMenuViewDelegate {
-    func importantMenuViewDidTapSortByNameButton(_ view: ImportantMenuView) {
-        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+    fileprivate func setupReminderToListShow(_ listSortDataByName: [Reminder]) {
         listImportant.removeAll()
         tableView.reloadData()
         
@@ -267,18 +287,14 @@ extension ImportantViewController: ImportantMenuViewDelegate {
         subMenuViewXib.isHidden = true
     }
     
+    func importantMenuViewDidTapSortByNameButton(_ view: ImportantMenuView) {
+        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+        setupReminderToListShow(listSortDataByName)
+    }
+    
     func importantMenuViewDidTapSortByDateTimeButton(_ view: ImportantMenuView) {
         let listSortDataByDateTime = ReminderStore.SharedInstance.getListReminderSortByDateTime()
-        listImportant.removeAll()
-        tableView.reloadData()
-        
-        for index in 0...listSortDataByDateTime.count - 1 {
-            listImportant.append(listSortDataByDateTime[index])
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath.init(row: index, section: 0)], with: .right)
-            tableView.endUpdates()
-        }
-        subMenuViewXib.isHidden = true
+        setupReminderToListShow(listSortDataByDateTime)
     }
 }
 

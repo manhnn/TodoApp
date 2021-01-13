@@ -360,7 +360,7 @@
                                     <action selector="btnDidTapShowAddView:" destination="9ZU-1G-ZYZ" eventType="touchUpInside" id="fpM-2v-oI1"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXY-gi-a2d" customClass="MyDayAddView" customModule="AppToDo" customModuleProvider="target">
+                            <view hidden="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXY-gi-a2d" customClass="MyDayAddView" customModule="AppToDo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="577" width="375" height="90"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -665,7 +665,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2l-Zl-7Ey">
                                 <rect key="frame" x="5" y="76.5" width="365" height="53.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Add to My Day">
                                     <color key="titleColor" red="1" green="0.3512687431" blue="0.30251326820000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -678,7 +678,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qd1-Xb-wf9">
                                 <rect key="frame" x="5" y="140" width="365" height="53.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Due date">
                                     <color key="titleColor" red="1" green="0.3512687431" blue="0.30251326820000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -691,10 +691,6 @@
                             <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="L3C-rr-bjy">
                                 <rect key="frame" x="30" y="198.5" width="280" height="53.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="datePickerAction:" destination="h5F-Gh-nye" eventType="valueChanged" id="OiW-cC-tHA"/>
-                                    <action selector="datePickerAction:" destination="1MW-E2-4Me" eventType="valueChanged" id="oAb-1v-ogM"/>
-                                </connections>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdn-Vq-eVr">
                                 <rect key="frame" x="325" y="213.5" width="30" height="30"/>
@@ -1055,9 +1051,6 @@
                             <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yh0-oz-jxW">
                                 <rect key="frame" x="30" y="203.5" width="290" height="53.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="datePickerAction:" destination="owe-X4-VWJ" eventType="valueChanged" id="ofL-1w-lTC"/>
-                                </connections>
                             </datePicker>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add notes" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-aG-jFm">
                                 <rect key="frame" x="5" y="262" width="365" height="133"/>
@@ -1110,7 +1103,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnAddToMyDay" destination="aql-5a-Hrc" id="YIC-ug-j40"/>
+                        <outlet property="btnAddToMyDay" destination="1JR-dp-M3X" id="dAj-nS-W7w"/>
                         <outlet property="btnComplete" destination="3VJ-RM-XHm" id="Gwx-21-YhJ"/>
                         <outlet property="btnDueDate" destination="Mfm-iJ-3Ts" id="NUQ-br-Of6"/>
                         <outlet property="btnImportant" destination="hxO-i1-8Vh" id="tnp-0z-ptp"/>
@@ -1407,9 +1400,6 @@
                             <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="8ez-ae-3jp">
                                 <rect key="frame" x="30" y="198.5" width="285" height="53.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="datePickerAction:" destination="h5F-Gh-nye" eventType="valueChanged" id="CR2-Kb-dL4"/>
-                                </connections>
                             </datePicker>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add notes" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="tg4-dq-dht">
                                 <rect key="frame" x="5" y="257" width="365" height="133"/>

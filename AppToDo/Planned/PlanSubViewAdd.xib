@@ -47,7 +47,7 @@
                     <rect key="frame" x="0.0" y="45" width="414" height="45"/>
                     <subviews>
                         <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bIs-se-C8f">
-                            <rect key="frame" x="75" y="0.0" width="269" height="45"/>
+                            <rect key="frame" x="50" y="0.0" width="269" height="45"/>
                             <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                 <!--1970-01-01 11:00:00 +0000-->
                             </date>
@@ -57,7 +57,7 @@
                             <locale key="locale" localeIdentifier="en"/>
                         </datePicker>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qt8-BP-OVd">
-                            <rect key="frame" x="50" y="0.0" width="314" height="45"/>
+                            <rect key="frame" x="50" y="0.0" width="281.5" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="30" minY="5" maxX="220" maxY="5"/>
                             <state key="normal" title="Setup due date for reminder" image="notification">
@@ -67,17 +67,31 @@
                                 <action selector="setDueDateButtonAction:" destination="gQj-Pg-egM" eventType="touchUpInside" id="ZNP-Sq-tu5"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9KK-xy-mu1">
+                            <rect key="frame" x="346.5" y="5" width="52.5" height="35"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="9KK-xy-mu1" secondAttribute="height" multiplier="3:2" id="YYW-Ds-nCN"/>
+                            </constraints>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="doneButtonAction:" destination="gQj-Pg-egM" eventType="touchUpInside" id="kES-MR-iP0"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="Qt8-BP-OVd" firstAttribute="leading" secondItem="2o8-lj-qi5" secondAttribute="leading" constant="50" id="4I1-Ow-Bob"/>
+                        <constraint firstItem="9KK-xy-mu1" firstAttribute="leading" secondItem="Qt8-BP-OVd" secondAttribute="trailing" constant="15" id="5ZZ-Wa-SWj"/>
+                        <constraint firstAttribute="bottom" secondItem="9KK-xy-mu1" secondAttribute="bottom" constant="5" id="BAr-fb-ATd"/>
                         <constraint firstItem="bIs-se-C8f" firstAttribute="width" secondItem="2o8-lj-qi5" secondAttribute="width" multiplier="0.65" id="BsN-qE-UF0"/>
-                        <constraint firstAttribute="bottom" secondItem="Qt8-BP-OVd" secondAttribute="bottom" id="Bz9-TG-n60"/>
+                        <constraint firstItem="Qt8-BP-OVd" firstAttribute="top" secondItem="2o8-lj-qi5" secondAttribute="top" id="EE6-DT-ebl"/>
                         <constraint firstAttribute="bottom" secondItem="bIs-se-C8f" secondAttribute="bottom" id="FfI-t5-exD"/>
-                        <constraint firstItem="Qt8-BP-OVd" firstAttribute="top" secondItem="2o8-lj-qi5" secondAttribute="top" id="O07-hQ-8OL"/>
-                        <constraint firstItem="bIs-se-C8f" firstAttribute="leading" secondItem="2o8-lj-qi5" secondAttribute="leading" constant="75" id="OzR-UI-012"/>
-                        <constraint firstItem="Qt8-BP-OVd" firstAttribute="leading" secondItem="2o8-lj-qi5" secondAttribute="leading" constant="50" id="Tm6-Zy-WGe"/>
+                        <constraint firstItem="bIs-se-C8f" firstAttribute="leading" secondItem="2o8-lj-qi5" secondAttribute="leading" constant="50" id="OzR-UI-012"/>
+                        <constraint firstItem="9KK-xy-mu1" firstAttribute="top" secondItem="2o8-lj-qi5" secondAttribute="top" constant="5" id="R9i-Ho-DdK"/>
                         <constraint firstItem="bIs-se-C8f" firstAttribute="top" secondItem="2o8-lj-qi5" secondAttribute="top" id="npE-ej-8l6"/>
-                        <constraint firstAttribute="trailing" secondItem="Qt8-BP-OVd" secondAttribute="trailing" constant="50" id="tmg-Ve-DOx"/>
+                        <constraint firstAttribute="bottom" secondItem="Qt8-BP-OVd" secondAttribute="bottom" id="wNT-U4-s6z"/>
+                        <constraint firstAttribute="trailing" secondItem="9KK-xy-mu1" secondAttribute="trailing" constant="15" id="xUs-aa-wKs"/>
                     </constraints>
                 </view>
             </subviews>
@@ -111,6 +125,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -41,8 +41,7 @@ class MyDayViewController: UIViewController {
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            heightKeyboard = keyboardHeight
+            heightKeyboard = keyboardRectangle.height
         }
     }
 
@@ -59,6 +58,7 @@ class MyDayViewController: UIViewController {
         view.trailingAnchor.constraint(equalTo: subViewAddReminder.trailingAnchor).isActive = true
         view.delegate = self
         view.txtTaskWork.delegate = self
+        //view.txtTaskWork.addDoneButtonOnKeyboard()
         view.txtTaskWork.becomeFirstResponder()
     }
     
@@ -78,36 +78,14 @@ class MyDayViewController: UIViewController {
     
     // MARK: - Select reminder from list add to 2 list where in my day
     func divDataToTwoList() {
-        let dayNow = getDateNow()
-        for index in 0..<listReminder.count {
-            if listReminder[index].isComplete == true && listReminder[index].isAddToMyDay && (compareTwoString(date: dayNow, dateTime: listReminder[index].taskScheduledDate) || compareTwoString(date: dayNow, dateTime: listReminder[index].taskDueDate)) {
-                listComplete.append(listReminder[index])
+        for obj in listReminder {
+            if obj.isComplete == true && obj.isAddToMyDay && (Date() == obj.taskScheduledDate || Date() == obj.taskDueDate) {
+                listComplete.append(obj)
             }
-            else if listReminder[index].isComplete == false && listReminder[index].isAddToMyDay && (compareTwoString(date: dayNow, dateTime: listReminder[index].taskScheduledDate) || compareTwoString(date: dayNow, dateTime: listReminder[index].taskDueDate)) {
-                listUncomplete.append(listReminder[index])
+            else if obj.isComplete == false && obj.isAddToMyDay && (Date() == obj.taskScheduledDate || Date() == obj.taskDueDate) {
+                listUncomplete.append(obj)
             }
         }
-    }
-    
-    // MARK: - Get now a today
-    func getDateNow() -> String {
-        let currentDateTime = Date()
-        let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .long
-        return formatter.string(from: currentDateTime)
-    }
-    
-    //MARK: - Compare date to dateTime
-    func compareTwoString(date: String, dateTime: String) -> Bool {
-        if date.count == 0 || dateTime.count == 0 {
-            return false
-        }
-        let subDateTime = dateTime[dateTime.startIndex..<dateTime.index(dateTime.startIndex, offsetBy: date.count)]
-        if date == subDateTime {
-            return true
-        }
-        return false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,12 +95,20 @@ class MyDayViewController: UIViewController {
         let currentDateTime = Date()
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-        formatter.dateStyle = .long
+        formatter.dateStyle = .full
         lblDateNow.text = formatter.string(from: currentDateTime)
+    }
+    
+    // MARK: - Function Convert Date to string
+    func convertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
     }
 }
 
-// MARK: - Custom TableView
+// MARK: - UITableViewDataSource
 extension MyDayViewController: UITableViewDataSource {
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -177,6 +163,7 @@ extension MyDayViewController: UITableViewDataSource {
         return 2
     }
     
+    // MARK: - Edit Header Section
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: -2, width: tableView.frame.width, height: 40))
         view.backgroundColor = .init(red: 191, green: 254, blue: 255, alpha: 0) // BFFEFF
@@ -187,6 +174,7 @@ extension MyDayViewController: UITableViewDataSource {
         return view
     }
 }
+
 extension MyDayViewController: UITableViewDelegate, UITextFieldDelegate {
     // MARK: - Buttons Action
     @IBAction func btnDidTapShowAddView(_ sender: Any) {
@@ -194,8 +182,9 @@ extension MyDayViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showViewXib()
         
-        self.viewBottomConstraint.constant = -heightKeyboard!
+        
         UIView.animate(withDuration: 0.4, animations: {
+            self.viewBottomConstraint.constant = -self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -341,6 +330,19 @@ extension MyDayViewController: MyDayDetailViewControllerDelegate {
             }
         }
     }
+    func myDayDetailViewController(_ view: MyDayDetailViewController, didTapSaveButtonWith reminder: Reminder) {
+        if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
+                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+            }
+        }
+        
+        else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
+                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+            }
+        }
+    }
 }
 // MARK: - Extension MyDayTablewViewCell
 extension MyDayViewController: MyDayTableViewCellDelegate {
@@ -423,8 +425,9 @@ extension MyDayViewController: MyDayAddViewDelegate {
         tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .middle)
         tableView.endUpdates()
         
-        self.viewBottomConstraint.constant = 0
+        
         UIView.animate(withDuration: 0.75, animations: {
+            self.viewBottomConstraint.constant = 0
             self.view.layoutIfNeeded()
         })
         
@@ -437,58 +440,42 @@ extension MyDayViewController: MyDayAddViewDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func myDayAddViewDidTapDoneButtonOnKeyboard(_ view: MyDayAddView) {
+        subViewAddReminder.isHidden = true
+        btnHiddenSubView.isHidden = false
+    }
 }
 
 // MARK: - Extension MyDaySubMenuView when Sorting
 extension MyDayViewController: MyDaySubMenuViewDelegate {
-    func myDaySubMenuViewDidTapSortByNameButton(_ view: MyDaySubMenuView) {
-        let dayNow = getDateNow()
-        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+    fileprivate func setupReminderToListShow(_ listSortDataByName: [Reminder]) {
         listComplete.removeAll()
         listUncomplete.removeAll()
-        for index in 0...listSortDataByName.count - 1  {
-            if listSortDataByName[index].isComplete == true && listSortDataByName[index].isAddToMyDay && compareTwoString(date: dayNow, dateTime: listSortDataByName[index].taskScheduledDate) {
-                listComplete.append(listSortDataByName[index])
+        for obj in listSortDataByName  {
+            if obj.isComplete == true && obj.isAddToMyDay && Date() == obj.taskScheduledDate {
+                listComplete.append(obj)
             }
-            else if listSortDataByName[index].isComplete == false && listSortDataByName[index].isAddToMyDay && compareTwoString(date: dayNow, dateTime: listSortDataByName[index].taskScheduledDate) {
-                listUncomplete.append(listSortDataByName[index])
+            else if obj.isComplete == false && obj.isAddToMyDay && Date() == obj.taskScheduledDate{
+                listUncomplete.append(obj)
             }
         }
         subMenuView.isHidden = true
         tableView.reloadData()
+    }
+    
+    func myDaySubMenuViewDidTapSortByNameButton(_ view: MyDaySubMenuView) {
+        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+        setupReminderToListShow(listSortDataByName)
     }
     
     func myDaySubMenuViewDidTapSortByDateTimeButton(_ view: MyDaySubMenuView) {
-        let dayNow = getDateNow()
         let listSortDataByDateTime = ReminderStore.SharedInstance.getListReminderSortByDateTime()
-        listComplete.removeAll()
-        listUncomplete.removeAll()
-        for index in 0...listSortDataByDateTime.count - 1  {
-            if listSortDataByDateTime[index].isComplete == true && listSortDataByDateTime[index].isAddToMyDay && compareTwoString(date: dayNow, dateTime: listSortDataByDateTime[index].taskDueDate) {
-                listComplete.append(listSortDataByDateTime[index])
-            }
-            else if listSortDataByDateTime[index].isComplete == false && listSortDataByDateTime[index].isAddToMyDay && compareTwoString(date: dayNow, dateTime: listSortDataByDateTime[index].taskScheduledDate) {
-                listUncomplete.append(listSortDataByDateTime[index])
-            }
-        }
-        subMenuView.isHidden = true
-        tableView.reloadData()
+        setupReminderToListShow(listSortDataByDateTime)
     }
     
     func myDaySubMenuViewDidTapSortByImportantButton(_ view: MyDaySubMenuView) {
-        let dayNow = getDateNow()
         let listSortDataByImportant = ReminderStore.SharedInstance.getListReminderSortByImportant()
-        listComplete.removeAll()
-        listUncomplete.removeAll()
-        for index in 0...listSortDataByImportant.count - 1 {
-            if listSortDataByImportant[index].isComplete == true && listSortDataByImportant[index].isAddToMyDay && compareTwoString(date: dayNow, dateTime: listSortDataByImportant[index].taskScheduledDate) {
-                listComplete.append(listSortDataByImportant[index])
-            }
-            else if listSortDataByImportant[index].isComplete == false && listSortDataByImportant[index].isAddToMyDay && compareTwoString(date: dayNow, dateTime: listSortDataByImportant[index].taskScheduledDate) {
-                listUncomplete.append(listSortDataByImportant[index])
-            }
-        }
-        subMenuView.isHidden = true
-        tableView.reloadData()
+        setupReminderToListShow(listSortDataByImportant)
     }
 }

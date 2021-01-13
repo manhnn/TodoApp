@@ -47,7 +47,7 @@
                     <rect key="frame" x="0.0" y="45" width="414" height="45"/>
                     <subviews>
                         <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="I7e-Yc-Dy9">
-                            <rect key="frame" x="75" y="0.0" width="269" height="45"/>
+                            <rect key="frame" x="50" y="0.0" width="269" height="45"/>
                             <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                 <!--1970-01-01 11:00:00 +0000-->
                             </date>
@@ -57,7 +57,7 @@
                             <locale key="locale" localeIdentifier="en"/>
                         </datePicker>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMK-mc-hcu">
-                            <rect key="frame" x="50" y="0.0" width="314" height="45"/>
+                            <rect key="frame" x="50" y="0.0" width="281.5" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="30" minY="5" maxX="200" maxY="5"/>
                             <state key="normal" title="Set due date for reminder" image="notificationred">
@@ -67,17 +67,31 @@
                                 <action selector="setDueDateButtonAction:" destination="yQ7-Pk-wME" eventType="touchUpInside" id="DLJ-K2-FAf"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brc-2f-Toy">
+                            <rect key="frame" x="346.5" y="5" width="52.5" height="35"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="brc-2f-Toy" secondAttribute="height" multiplier="3:2" id="r8N-V9-ARj"/>
+                            </constraints>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="doneButtonAction:" destination="yQ7-Pk-wME" eventType="touchUpInside" id="uru-93-zja"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="I7e-Yc-Dy9" firstAttribute="top" secondItem="2lv-BQ-xwg" secondAttribute="top" id="1Tp-44-S8B"/>
-                        <constraint firstItem="IMK-mc-hcu" firstAttribute="top" secondItem="2lv-BQ-xwg" secondAttribute="top" id="6Ro-qj-Wdd"/>
-                        <constraint firstItem="I7e-Yc-Dy9" firstAttribute="leading" secondItem="2lv-BQ-xwg" secondAttribute="leading" constant="75" id="6SF-nH-h5g"/>
+                        <constraint firstItem="I7e-Yc-Dy9" firstAttribute="leading" secondItem="2lv-BQ-xwg" secondAttribute="leading" constant="50" id="6SF-nH-h5g"/>
+                        <constraint firstItem="IMK-mc-hcu" firstAttribute="leading" secondItem="2lv-BQ-xwg" secondAttribute="leading" constant="50" id="ADy-VQ-UeF"/>
+                        <constraint firstAttribute="trailing" secondItem="brc-2f-Toy" secondAttribute="trailing" constant="15" id="BRg-X3-FqE"/>
                         <constraint firstItem="I7e-Yc-Dy9" firstAttribute="width" secondItem="2lv-BQ-xwg" secondAttribute="width" multiplier="0.65" id="EmA-El-ljp"/>
-                        <constraint firstAttribute="trailing" secondItem="IMK-mc-hcu" secondAttribute="trailing" constant="50" id="H2L-L7-DlY"/>
-                        <constraint firstItem="IMK-mc-hcu" firstAttribute="leading" secondItem="2lv-BQ-xwg" secondAttribute="leading" constant="50" id="MJv-pP-xuT"/>
-                        <constraint firstAttribute="bottom" secondItem="IMK-mc-hcu" secondAttribute="bottom" id="NvN-IY-LTJ"/>
+                        <constraint firstItem="IMK-mc-hcu" firstAttribute="top" secondItem="2lv-BQ-xwg" secondAttribute="top" id="OYz-Do-0f9"/>
+                        <constraint firstAttribute="bottom" secondItem="brc-2f-Toy" secondAttribute="bottom" constant="5" id="SD9-T3-N9j"/>
                         <constraint firstAttribute="bottom" secondItem="I7e-Yc-Dy9" secondAttribute="bottom" id="bh4-21-pb0"/>
+                        <constraint firstItem="brc-2f-Toy" firstAttribute="top" secondItem="2lv-BQ-xwg" secondAttribute="top" constant="5" id="jrj-Nb-15N"/>
+                        <constraint firstItem="brc-2f-Toy" firstAttribute="leading" secondItem="IMK-mc-hcu" secondAttribute="trailing" constant="15" id="qaf-QL-odM"/>
+                        <constraint firstAttribute="bottom" secondItem="IMK-mc-hcu" secondAttribute="bottom" id="ufD-Ay-w16"/>
                     </constraints>
                 </view>
             </subviews>
@@ -111,6 +125,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

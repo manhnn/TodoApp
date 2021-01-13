@@ -12,6 +12,7 @@ protocol PlanDetailViewControllerDelegate {
     func planDetailViewController(_ view: PlanDetailViewController, didTapImportantButtonOn reminder: Reminder)
     func planDetailViewController(_ view: PlanDetailViewController, didTapDeleteButtonOn reminder: Reminder)
     func planDetailViewController(_ view: PlanDetailViewController, didTapAddToMyDayButtonOn reminder: Reminder)
+    func planDetailViewController(_ view: PlanDetailViewController, didTapSaveButtonWith reminder: Reminder)
 }
 
 class PlanDetailViewController: UIViewController {
@@ -33,7 +34,13 @@ class PlanDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.lblWork.text = reminder.taskWorkName
-        self.btnDueDate.setTitle("Due Date: " + reminder.taskDueDate, for: .normal)
+        if reminder.taskDueDate != Date(timeIntervalSince1970: 0) {
+            self.btnDueDate.setTitle("Due Date: \(convertDateToString(date: reminder.taskDueDate))", for: .normal)
+        }
+        else {
+            btnDueDate.setTitle("Due Date:", for: .normal)
+        }
+        setColorForDueDateButton()
         
         if reminder.isComplete {
             btnComplete.setImage(UIImage(named: "check"), for: .normal)
@@ -50,13 +57,37 @@ class PlanDetailViewController: UIViewController {
         }
         
         if reminder.isAddToMyDay {
-            btnAddToMyDay.setTitleColor(.systemRed, for: .normal)
+            btnAddToMyDay.setTitleColor(.systemGreen, for: .normal)
         }
         else {
             btnAddToMyDay.setTitleColor(.black, for: .normal)
         }
         
         txtNote.text = reminder.txtNote
+    }
+    
+    // MARK: - Function set color
+    func setColorForDueDateButton() {
+        if reminder.taskDueDate == Date(timeIntervalSince1970: 0) {
+            btnDueDate.setTitleColor(.systemBlue, for: .normal)
+        }
+        else if reminder.taskDueDate < Date() {
+            btnDueDate.setTitleColor(.systemRed, for: .normal)
+        }
+        else if reminder.taskDueDate > Date() {
+            btnDueDate.setTitleColor(.black, for: .normal)
+        }
+        else {
+            btnDueDate.setTitleColor(.systemBlue, for: .normal)
+        }
+    }
+    
+    // MARK: - Convert Date to string
+    func convertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
     }
     
     // MARK: - Buttons Action
@@ -94,16 +125,12 @@ class PlanDetailViewController: UIViewController {
     }
     
     @IBAction func btnSaveAction(_ sender: Any) {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .long
-        
         let alertWarning = UIAlertController(title: "Warning", message: "You don't update anything", preferredStyle: .alert)
         let alertSuccess = UIAlertController(title: "Congratulation!", message: "Update Success", preferredStyle: .alert)
         let alertSave = UIAlertController(title: "Save", message: "Are you sure you want to 'Save reminder'?", preferredStyle: .alert)
         
         let deleteAction = UIAlertAction(title: "Yes", style: .default) { [self] (action) in
-            if reminder.txtNote == txtNote.text && reminder.taskDueDate == formatter.string(from: datePicker.date) {
+            if reminder.txtNote == txtNote.text && reminder.taskDueDate == datePicker.date {
                 let iknowAction = UIAlertAction(title: "I undersand!", style: .default, handler: nil)
                 alertWarning.addAction(iknowAction)
                 present(alertWarning, animated: true)
@@ -113,17 +140,18 @@ class PlanDetailViewController: UIViewController {
                     reminder.txtNote = txtNote.text
                 }
                 if datePicker.isHidden == false {
-                    reminder.taskDueDate = formatter.string(from: datePicker.date)
+                    reminder.taskDueDate = datePicker.date
                 }
                 ReminderStore.SharedInstance.updateReminder(reminder: reminder)
+                delegate?.planDetailViewController(self, didTapSaveButtonWith: reminder)
             
-                btnDueDate.setTitle(formatter.string(from: datePicker.date), for: .normal)
+                btnDueDate.setTitle(convertDateToString(date: reminder.taskDueDate), for: .normal)
+                setColorForDueDateButton()
                 
                 let yesAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
                 alertSuccess.addAction(yesAction)
                 present(alertSuccess, animated: true)
                 
-                btnDueDate.setTitleColor(.systemGreen, for: .normal)
                 datePicker.isHidden = true
             }
         }
@@ -133,13 +161,6 @@ class PlanDetailViewController: UIViewController {
         present(alertSave, animated: true)
         
         self.txtNote.endEditing(true)
-    }
-    
-    @IBAction func datePickerAction(_ sender: Any) {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .long
-        print(formatter.string(from: datePicker.date))
     }
     
     @IBAction func btnDueDate(_ sender: Any) {

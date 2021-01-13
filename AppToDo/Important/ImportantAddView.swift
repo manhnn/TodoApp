@@ -10,6 +10,7 @@ import UIKit
 protocol ImportantAddViewDelegate {
     func importantAddView(_ view: ImportantAddView, didAddItemSuccessWith reminder: Reminder)
     func importantAddViewDidAddItemFail(_ view: ImportantAddView)
+    func importantAddViewDidTapDoneButtonOnKeyboard(_ view: ImportantAddView)
 }
 
 class ImportantAddView: UIView, UITextFieldDelegate {
@@ -19,7 +20,7 @@ class ImportantAddView: UIView, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var setDueDateButton: UIButton!
     
-    var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: "", taskDueDate: "", isComplete: false, isImportant: true, isAddToMyDay: true, txtNote: "Add notes...")
+    var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: true, isAddToMyDay: true, txtNote: "Add notes...")
     public var delegate: ImportantAddViewDelegate?
 
     // MARK: - Buttons Action
@@ -36,14 +37,14 @@ class ImportantAddView: UIView, UITextFieldDelegate {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .long
-        newReminder.taskDueDate = formatter.string(from: datePicker.date)
+        newReminder.taskDueDate = datePicker.date
     }
     
     @IBAction func btnDidTapAddReminder(_ sender: Any) {
         //add du lieu vao DB
         txtTaskWork.delegate = self
         newReminder.taskWorkName = txtTaskWork.text!
-        newReminder.taskScheduledDate = getDateNow()
+        newReminder.taskScheduledDate = Date()
         if  newReminder.taskWorkName != "" {
             ReminderStore.SharedInstance.addReminder(newReminder: newReminder)
             
@@ -58,12 +59,9 @@ class ImportantAddView: UIView, UITextFieldDelegate {
         self.txtTaskWork.endEditing(true)
     }
     
-    func getDateNow() -> String {
-        let currentDateTime = Date()
-        let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .long
-        return formatter.string(from: currentDateTime)
+    @IBAction func doneButtonAction(_ sender: Any) {
+        delegate?.importantAddViewDidTapDoneButtonOnKeyboard(self)
+        self.txtTaskWork.resignFirstResponder()
     }
 }
 

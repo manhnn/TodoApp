@@ -33,19 +33,23 @@ class TasksTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    // MARK: - Get nowDay
-    func getDateNow() -> String {
-        let currentDateTime = Date()
+    // MARK: - Convert Date
+    func convertDateToString(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .long
-        return formatter.string(from: currentDateTime)
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
     }
     
     // MARK: - Custom Cell
     func setupData(_ cell: Reminder) {
         self.lblWork.text = cell.taskWorkName
-        self.lblDateTime.text = cell.taskDueDate
+        if cell.taskDueDate != Date(timeIntervalSince1970: 0) {
+            self.lblDateTime.text = convertDateToString(date: cell.taskDueDate)
+        }
+        else {
+            lblDateTime.text = ""
+        }
         
         if cell.isImportant {
             btnImportant.setImage(UIImage(named: "starblack"), for: .normal)

@@ -11,14 +11,14 @@ import RealmSwift
 class RLMReminder: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var taskWorkName = ""
-    @objc dynamic var taskScheduledDate = ""
-    @objc dynamic var taskDueDate = ""
+    @objc dynamic var taskScheduledDate = Date()
+    @objc dynamic var taskDueDate = Date()
     @objc dynamic var isComplete = false
     @objc dynamic var isImportant = false
     @objc dynamic var isAddToMyDay = true
     @objc dynamic var txtNote = ""
     
-    convenience init(taskName: String, taskScheduledDate: String, taskDueDate: String, isComplete: Bool, isImportant: Bool, isAddToMyDay: Bool, txtNote: String) {
+    convenience init(taskName: String, taskScheduledDate: Date, taskDueDate: Date, isComplete: Bool, isImportant: Bool, isAddToMyDay: Bool, txtNote: String) {
         self.init()
         self.taskWorkName = taskName
         self.taskScheduledDate = taskScheduledDate

@@ -10,6 +10,7 @@ import UIKit
 protocol PlanAddViewDelegate {
     func planAddView(_ view: PlanAddView, didAddItemSuccessWith reminder: Reminder)
     func planAddViewDidAddItemFail(_ view: PlanAddView)
+    func planAddViewDidTapDoneButtonOnKeyboard(_ view: PlanAddView)
 }
 
 class PlanAddView: UIView, UITextFieldDelegate {
@@ -19,7 +20,8 @@ class PlanAddView: UIView, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var setDueDateButton: UIButton!
     
-    var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: "", taskDueDate: "", isComplete: false, isImportant: true, isAddToMyDay: true, txtNote: "Add notes...")
+    var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: true, isAddToMyDay: true, txtNote: "Add notes...")
+    
     public var delegate: PlanAddViewDelegate?
     
     // MARK: - Buttons Action
@@ -38,11 +40,11 @@ class PlanAddView: UIView, UITextFieldDelegate {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .long
-        newReminder.taskDueDate = formatter.string(from: datePicker.date)
+        newReminder.taskDueDate = datePicker.date
         
         txtTaskWork.delegate = self
         newReminder.taskWorkName = txtTaskWork.text!
-        newReminder.taskScheduledDate = getDateNow()
+        newReminder.taskScheduledDate = Date()
         if  newReminder.taskWorkName != "" {
             ReminderStore.SharedInstance.addReminder(newReminder: newReminder)
             
@@ -57,12 +59,10 @@ class PlanAddView: UIView, UITextFieldDelegate {
         self.txtTaskWork.endEditing(true)
     }
     
-    func getDateNow() -> String {
-        let currentDateTime = Date()
-        let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .long
-        return formatter.string(from: currentDateTime)
+    @IBAction func doneButtonAction(_ sender: Any) {
+        delegate?.planAddViewDidTapDoneButtonOnKeyboard(self)
+        self.txtTaskWork.resignFirstResponder()
     }
+    
 }
 

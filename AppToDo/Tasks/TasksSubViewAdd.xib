@@ -47,7 +47,7 @@
                     <rect key="frame" x="0.0" y="45" width="414" height="45"/>
                     <subviews>
                         <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TO9-zX-gJn">
-                            <rect key="frame" x="75" y="0.0" width="269" height="45"/>
+                            <rect key="frame" x="50" y="0.0" width="269" height="45"/>
                             <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                 <!--1970-01-01 11:00:00 +0000-->
                             </date>
@@ -57,7 +57,7 @@
                             <locale key="locale" localeIdentifier="en"/>
                         </datePicker>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0S-xY-8KD">
-                            <rect key="frame" x="50" y="0.0" width="314" height="45"/>
+                            <rect key="frame" x="50" y="0.0" width="281.5" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="30" minY="5" maxX="190" maxY="5"/>
                             <state key="normal" title="Setup due date for reminder" image="notificationblue">
@@ -67,17 +67,31 @@
                                 <action selector="setDueDateButtonAction:" destination="rb9-Vl-cGO" eventType="touchUpInside" id="dEm-8G-1hU"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YY0-Zt-KGS">
+                            <rect key="frame" x="346.5" y="5" width="52.5" height="35"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="YY0-Zt-KGS" secondAttribute="height" multiplier="3:2" id="Ulg-0z-61x"/>
+                            </constraints>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="doneButtonAction:" destination="rb9-Vl-cGO" eventType="touchUpInside" id="qWd-rg-bmc"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="g0S-xY-8KD" firstAttribute="top" secondItem="1pP-Ty-2Wi" secondAttribute="top" id="3H8-ao-GxC"/>
+                        <constraint firstAttribute="bottom" secondItem="YY0-Zt-KGS" secondAttribute="bottom" constant="5" id="37Z-NY-t6m"/>
                         <constraint firstItem="TO9-zX-gJn" firstAttribute="top" secondItem="1pP-Ty-2Wi" secondAttribute="top" id="5lC-v4-VeT"/>
+                        <constraint firstItem="YY0-Zt-KGS" firstAttribute="leading" secondItem="g0S-xY-8KD" secondAttribute="trailing" constant="15" id="6zg-JZ-0br"/>
                         <constraint firstAttribute="bottom" secondItem="TO9-zX-gJn" secondAttribute="bottom" id="73N-7z-tLp"/>
-                        <constraint firstAttribute="trailing" secondItem="g0S-xY-8KD" secondAttribute="trailing" constant="50" id="8q6-Qp-ysG"/>
-                        <constraint firstItem="TO9-zX-gJn" firstAttribute="leading" secondItem="1pP-Ty-2Wi" secondAttribute="leading" constant="75" id="BKc-R6-0nk"/>
-                        <constraint firstItem="g0S-xY-8KD" firstAttribute="leading" secondItem="1pP-Ty-2Wi" secondAttribute="leading" constant="50" id="LNU-cb-0oq"/>
+                        <constraint firstAttribute="bottom" secondItem="g0S-xY-8KD" secondAttribute="bottom" id="7fQ-9m-83z"/>
+                        <constraint firstItem="YY0-Zt-KGS" firstAttribute="top" secondItem="1pP-Ty-2Wi" secondAttribute="top" constant="5" id="8NJ-cL-peL"/>
+                        <constraint firstItem="TO9-zX-gJn" firstAttribute="leading" secondItem="1pP-Ty-2Wi" secondAttribute="leading" constant="50" id="BKc-R6-0nk"/>
                         <constraint firstItem="TO9-zX-gJn" firstAttribute="width" secondItem="1pP-Ty-2Wi" secondAttribute="width" multiplier="0.65" id="My6-5W-vxU"/>
-                        <constraint firstAttribute="bottom" secondItem="g0S-xY-8KD" secondAttribute="bottom" id="tqG-Ui-xTf"/>
+                        <constraint firstAttribute="trailing" secondItem="YY0-Zt-KGS" secondAttribute="trailing" constant="15" id="Pii-j9-yUB"/>
+                        <constraint firstItem="g0S-xY-8KD" firstAttribute="leading" secondItem="1pP-Ty-2Wi" secondAttribute="leading" constant="50" id="R7f-Lh-Dn7"/>
+                        <constraint firstItem="g0S-xY-8KD" firstAttribute="top" secondItem="1pP-Ty-2Wi" secondAttribute="top" id="fZd-fh-rwA"/>
                     </constraints>
                 </view>
             </subviews>
@@ -111,6 +125,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

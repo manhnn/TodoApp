@@ -34,10 +34,23 @@ class ImportantTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // MARK: - Convert Date to string
+    func convertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .long
+        return formatter.string(from: date)
+    }
+    
     // MARK: - Custom Cell
     func setupData(_ cell: Reminder) {
         self.lblWork.text = cell.taskWorkName
-        self.lblDateTime.text = cell.taskDueDate
+        if cell.taskDueDate != Date(timeIntervalSince1970: 0) {
+            self.lblDateTime.text = convertDateToString(date: cell.taskDueDate)
+        }
+        else {
+            lblDateTime.text = ""
+        }
         
         if cell.isImportant {
             btnImportant.setImage(UIImage(named: "starredd"), for: .normal)

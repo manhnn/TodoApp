@@ -39,8 +39,7 @@ class TasksViewController: UIViewController {
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            heightKeyboard = keyboardHeight
+            heightKeyboard = keyboardRectangle.height
         }
     }
     
@@ -76,12 +75,12 @@ class TasksViewController: UIViewController {
     
     // MARK: - Div From listReminder to 2 subList
     func divDataToTwoListTasks() {
-        for index in 0..<listReminder.count {
-            if listReminder[index].isComplete == true {
-                listComplete.append(listReminder[index])
+        for obj in listReminder {
+            if obj.isComplete == true {
+                listComplete.append(obj)
             }
-            else if listReminder[index].isComplete == false {
-                listUncomplete.append(listReminder[index])
+            else if obj.isComplete == false {
+                listUncomplete.append(obj)
             }
         }
     }
@@ -90,9 +89,17 @@ class TasksViewController: UIViewController {
         super.viewWillAppear(animated)
         
     }
+    
+    // MARK: - Function Convert Date to string
+    func convertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
+    }
 }
 
-// MARK: - Custom TableView
+// MARK: - UITableViewDataSource 
 extension TasksViewController: UITableViewDataSource {
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -161,8 +168,8 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
         btnHiddenSubView.isHidden = true
         showSubViewXib()
         
-        self.viewBottomConstraint.constant = -heightKeyboard!
         UIView.animate(withDuration: 0.4, animations: {
+            self.viewBottomConstraint.constant = -self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
     }
@@ -307,6 +314,21 @@ extension TasksViewController: TasksDetailViewControllerDelegate {
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         tableView.reloadData()
     }
+    
+    // MARK: - Change Date and Note
+    func tasksDetailViewController(_ view: TasksDetailViewController, didTapSaveButtonWith reminder: Reminder) {
+        if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
+                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+            }
+        }
+        
+        else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? TasksTableViewCell {
+                cell.lblDateTime.text = convertDateToString(date: reminder.taskDueDate)
+            }
+        }
+    }
 }
 
 // MARK: - Extension TasksTableViewCell
@@ -316,7 +338,7 @@ extension TasksViewController: TasksTableViewCellDelegate {
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
         // Update icon ko can reload data
-        if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}){
+        if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? TasksTableViewCell {
                 if reminder.isImportant {
                     cell.btnImportant.setImage(UIImage(named: "starblack"), for: .normal)
@@ -390,8 +412,8 @@ extension TasksViewController: TasksAddViewDelegate {
         tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .top)
         tableView.endUpdates()
         
-        self.viewBottomConstraint.constant = 0
         UIView.animate(withDuration: 0.75, animations: {
+            self.viewBottomConstraint.constant = 0
             self.view.layoutIfNeeded()
         })
         
@@ -404,54 +426,41 @@ extension TasksViewController: TasksAddViewDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func tasksAddViewDidTapDoneButtonOnKeyboard(_ view: TasksAddView) {
+        subViewAddXib.isHidden = true
+        btnHiddenSubView.isHidden = false
+    }
 }
 
 extension TasksViewController: TasksMenuViewDelegate {
-    func tasksMenuViewDidTapSortByNameButton(_ view: TasksMenuView) {
-        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+    fileprivate func setupReminderToListShow(_ listSortDataByDateTime: [Reminder]) {
         listComplete.removeAll()
         listUncomplete.removeAll()
-        for index in 0...listSortDataByName.count - 1 {
-            if listSortDataByName[index].isComplete == true {
-                listComplete.append(listSortDataByName[index])
+        for obj in listSortDataByDateTime {
+            if obj.isComplete == true {
+                listComplete.append(obj)
             }
-            else if listSortDataByName[index].isComplete == false {
-                listUncomplete.append(listSortDataByName[index])
+            else if obj.isComplete == false {
+                listUncomplete.append(obj)
             }
         }
         subMenuViewXib.isHidden = true
         tableView.reloadData()
+    }
+    
+    func tasksMenuViewDidTapSortByNameButton(_ view: TasksMenuView) {
+        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+        setupReminderToListShow(listSortDataByName)
     }
     
     func tasksMenuViewDidTapSortByDateTimeButton(_ view: TasksMenuView) {
         let listSortDataByDateTime = ReminderStore.SharedInstance.getListReminderSortByDateTime()
-        listComplete.removeAll()
-        listUncomplete.removeAll()
-        for index in 0...listSortDataByDateTime.count - 1 {
-            if listSortDataByDateTime[index].isComplete == true {
-                listComplete.append(listSortDataByDateTime[index])
-            }
-            else if listSortDataByDateTime[index].isComplete == false {
-                listUncomplete.append(listSortDataByDateTime[index])
-            }
-        }
-        subMenuViewXib.isHidden = true
-        tableView.reloadData()
+        setupReminderToListShow(listSortDataByDateTime)
     }
     
     func tasksMenuViewDidTapSortByImportantButton(_ view: TasksMenuView) {
         let listSortDataByImportant = ReminderStore.SharedInstance.getListReminderSortByImportant()
-        listComplete.removeAll()
-        listUncomplete.removeAll()
-        for index in 0...listSortDataByImportant.count - 1 {
-            if listSortDataByImportant[index].isComplete == true {
-                listComplete.append(listSortDataByImportant[index])
-            }
-            else if listSortDataByImportant[index].isComplete == false {
-                listUncomplete.append(listSortDataByImportant[index])
-            }
-        }
-        subMenuViewXib.isHidden = true
-        tableView.reloadData()
+        setupReminderToListShow(listSortDataByImportant)
     }
 }
