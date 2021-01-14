@@ -74,9 +74,6 @@ class TasksTableViewCell: UITableViewCell {
             self.btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
         }
         
-        self.backgroundColor = .white
-        self.cellView.backgroundColor = .white
-        self.subView.backgroundColor = .white
         self.cellView.layer.cornerRadius = self.cellView.frame.height / 5
     }
     

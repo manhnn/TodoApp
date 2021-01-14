@@ -68,9 +68,6 @@ class ImportantTableViewCell: UITableViewCell {
             self.btnComplete.setImage(UIImage(named: "recred"), for: .normal)
         }
         
-        self.backgroundColor = .white
-        self.cellView.backgroundColor = .white
-        self.subView.backgroundColor = .white
         self.cellView.layer.cornerRadius = self.cellView.frame.height / 5
     }
     

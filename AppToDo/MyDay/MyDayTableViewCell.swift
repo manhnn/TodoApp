@@ -45,7 +45,7 @@ class MyDayTableViewCell: UITableViewCell {
             lblDateTime.textColor = .systemPurple
         }
         else {
-            lblDateTime.textColor = . systemRed
+            lblDateTime.textColor = .systemRed
         }
     }
     
@@ -77,9 +77,6 @@ class MyDayTableViewCell: UITableViewCell {
             self.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
         }
         
-        self.backgroundColor = .white
-        self.cellView.backgroundColor = .white
-        self.subView.backgroundColor = .white
         self.cellView.layer.cornerRadius = self.cellView.frame.height / 5
     }
     

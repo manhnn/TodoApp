@@ -21,6 +21,7 @@ class TasksViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var subMenuViewXib: UIView!
     @IBOutlet weak var subViewAddXib: UIView!
+    @IBOutlet weak var subColorViewXib: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
@@ -35,7 +36,7 @@ class TasksViewController: UIViewController {
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    // MARK: Get Height keyboard
+    // MARK: - Get Height keyboard
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -70,6 +71,20 @@ class TasksViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: subMenuViewXib.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: subMenuViewXib.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: subMenuViewXib.trailingAnchor).isActive = true
+        view.delegate = self
+    }
+    
+    // MARK: - Show SubColorView.xib
+    func showColorViewXib() {
+        let nib = UINib(nibName: "SubColorView", bundle: nil)
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! SubColorView
+        view.frame = subColorViewXib.bounds
+        subColorViewXib.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: subColorViewXib.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: subColorViewXib.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: subColorViewXib.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: subColorViewXib.trailingAnchor).isActive = true
         view.delegate = self
     }
     
@@ -163,6 +178,12 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
             self.viewBottomConstraint.constant = self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
+    }
+    
+    // MARK: - Button Show Color View
+    @IBAction func btnShowColorView(_ sender: Any) {
+        subColorViewXib.isHidden = !subColorViewXib.isHidden
+        showColorViewXib()
     }
     
     //MARK: - Show Menu Sort
@@ -407,6 +428,7 @@ extension TasksViewController: TasksAddViewDelegate {
     }
 }
 
+// MARK: - Sort Reminder
 extension TasksViewController: TasksMenuViewDelegate {
     fileprivate func setupReminderToListShow(_ listSortDataByDateTime: [Reminder]) {
         listComplete.removeAll()
@@ -436,5 +458,15 @@ extension TasksViewController: TasksMenuViewDelegate {
     func tasksMenuViewDidTapSortByImportantButton(_ view: TasksMenuView) {
         let listSortDataByImportant = ReminderStore.SharedInstance.getListReminderSortByImportant()
         setupReminderToListShow(listSortDataByImportant)
+    }
+}
+
+// MARK: - Change Color Background
+extension TasksViewController: SubColorViewDelegate {
+    func subColorView(_ view: SubColorView, didTapChangeBackgroundColorButtonWith color: UIColor) {
+        self.view.backgroundColor = color
+    }
+    func subColorViewDidTapExitButton(_ view: SubColorView) {
+        subColorViewXib.isHidden = true
     }
 }

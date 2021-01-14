@@ -37,6 +37,8 @@
 		256CE5FC25A2A5E5003EF093 /* MyDayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256CE5FB25A2A5E5003EF093 /* MyDayDetailViewController.swift */; };
 		256E2BB425A4BA4500E15475 /* MyDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256E2BB325A4BA4500E15475 /* MyDayTableViewCell.swift */; };
 		25733EE225AED2C200896A50 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25733EE125AED2C200896A50 /* Extension.swift */; };
+		2574013425B09EAA0077FB70 /* SubColorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2574013325B09EAA0077FB70 /* SubColorView.xib */; };
+		2574013925B0A0DE0077FB70 /* SubColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574013825B0A0DE0077FB70 /* SubColorView.swift */; };
 		257BE4C925A61E090018447E /* MyDaySubViewAdd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 257BE4C825A61E090018447E /* MyDaySubViewAdd.xib */; };
 		2586B869259F872000F6E6FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586B868259F872000F6E6FE /* AppDelegate.swift */; };
 		2586B86B259F872000F6E6FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586B86A259F872000F6E6FE /* SceneDelegate.swift */; };
@@ -80,6 +82,8 @@
 		256CE5FB25A2A5E5003EF093 /* MyDayDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDayDetailViewController.swift; sourceTree = "<group>"; };
 		256E2BB325A4BA4500E15475 /* MyDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDayTableViewCell.swift; sourceTree = "<group>"; };
 		25733EE125AED2C200896A50 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		2574013325B09EAA0077FB70 /* SubColorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubColorView.xib; sourceTree = "<group>"; };
+		2574013825B0A0DE0077FB70 /* SubColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubColorView.swift; sourceTree = "<group>"; };
 		257BE4C825A61E090018447E /* MyDaySubViewAdd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyDaySubViewAdd.xib; sourceTree = "<group>"; };
 		2586B865259F872000F6E6FE /* AppToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2586B868259F872000F6E6FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +154,15 @@
 			path = Tasks;
 			sourceTree = "<group>";
 		};
+		2574013725B0A09B0077FB70 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				2574013325B09EAA0077FB70 /* SubColorView.xib */,
+				2574013825B0A0DE0077FB70 /* SubColorView.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
 		257BE4CC25A627620018447E /* MyDay */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +206,7 @@
 				2586B871259F872200F6E6FE /* Assets.xcassets */,
 				2586B873259F872200F6E6FE /* LaunchScreen.storyboard */,
 				2586B882259F931900F6E6FE /* DataLocal */,
+				2574013725B0A09B0077FB70 /* Color */,
 				257BE4CC25A627620018447E /* MyDay */,
 				25560AE025AA15C200E92154 /* Important */,
 				2544C91C25AD4F8A00836F83 /* Planned */,
@@ -294,6 +308,7 @@
 				257BE4C925A61E090018447E /* MyDaySubViewAdd.xib in Resources */,
 				2555B27225A8AC6700373A1B /* TasksSubMenuView.xib in Resources */,
 				25560AD925AA059E00E92154 /* MyDaySubMenuView.xib in Resources */,
+				2574013425B09EAA0077FB70 /* SubColorView.xib in Resources */,
 				2544C93125AD506500836F83 /* PlanSubViewAdd.xib in Resources */,
 				2544F84C25AAD2FA002BFDCC /* ImportantSubMenuView.xib in Resources */,
 				2544C92E25AD505400836F83 /* PlanSubMenuView.xib in Resources */,
@@ -373,6 +388,7 @@
 				2586B86B259F872000F6E6FE /* SceneDelegate.swift in Sources */,
 				2552EA7B25AC2BD400DE324A /* RLMReminder.swift in Sources */,
 				256C70B325A7F3BE0099BBFC /* TasksTableViewCell.swift in Sources */,
+				2574013925B0A0DE0077FB70 /* SubColorView.swift in Sources */,
 				25036E7A25A5713B00511E62 /* MyDayAddView.swift in Sources */,
 				2586B880259F883300F6E6FE /* MyDayViewController.swift in Sources */,
 				25733EE225AED2C200896A50 /* Extension.swift in Sources */,

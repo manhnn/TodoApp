@@ -21,8 +21,8 @@ class MyDayViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var subViewAddReminder: UIView!
     @IBOutlet weak var subMenuView: UIView!
+    @IBOutlet weak var subColorViewXib: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
-    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var lblDateNow: UILabel!
     
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
@@ -35,8 +35,6 @@ class MyDayViewController: UIViewController {
         divDataToTwoList()
         
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        
     }
     
     // MARK: Get Height keyboard
@@ -74,6 +72,20 @@ class MyDayViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: subMenuView.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: subMenuView.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: subMenuView.trailingAnchor).isActive = true
+        view.delegate = self
+    }
+    
+    // MARK: - Show SubColorView.xib
+    func showColorViewXib() {
+        let nib = UINib(nibName: "SubColorView", bundle: nil)
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! SubColorView
+        view.frame = subColorViewXib.bounds
+        subColorViewXib.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: subColorViewXib.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: subColorViewXib.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: subColorViewXib.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: subColorViewXib.trailingAnchor).isActive = true
         view.delegate = self
     }
     
@@ -179,6 +191,12 @@ extension MyDayViewController: UITableViewDelegate, UITextFieldDelegate {
             self.viewBottomConstraint.constant = self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
+    }
+    
+    // MARK: - Button Show Color View
+    @IBAction func btnShowColorView(_ sender: Any) {
+        subColorViewXib.isHidden = !subColorViewXib.isHidden
+        showColorViewXib()
     }
     
     @IBAction func btnDidTapShowSubMenuView(_ sender: Any) {
@@ -448,5 +466,15 @@ extension MyDayViewController: MyDaySubMenuViewDelegate {
     func myDaySubMenuViewDidTapSortByImportantButton(_ view: MyDaySubMenuView) {
         let listSortDataByImportant = ReminderStore.SharedInstance.getListReminderSortByImportant()
         setupReminderToListShow(listSortDataByImportant)
+    }
+}
+
+// MARK: - Change Color Background
+extension MyDayViewController: SubColorViewDelegate {
+    func subColorView(_ view: SubColorView, didTapChangeBackgroundColorButtonWith color: UIColor) {
+        self.view.backgroundColor = color
+    }
+    func subColorViewDidTapExitButton(_ view: SubColorView) {
+        subColorViewXib.isHidden = true
     }
 }

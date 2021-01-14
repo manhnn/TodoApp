@@ -19,9 +19,7 @@ class ImportantViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var subMenuViewXib: UIView!
     @IBOutlet weak var subViewAddXib: UIView!
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var subColorViewXib: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     
@@ -34,8 +32,6 @@ class ImportantViewController: UIViewController {
         
         // MARK: - Notification
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        
     }
     
     // MARK: Get Height keyboard
@@ -73,6 +69,20 @@ class ImportantViewController: UIViewController {
         view.bottomAnchor.constraint(equalTo: subMenuViewXib.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: subMenuViewXib.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: subMenuViewXib.trailingAnchor).isActive = true
+        view.delegate = self
+    }
+    
+    // MARK: - Show SubColorView.xib
+    func showColorViewXib() {
+        let nib = UINib(nibName: "SubColorView", bundle: nil)
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! SubColorView
+        view.frame = subColorViewXib.bounds
+        subColorViewXib.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: subColorViewXib.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: subColorViewXib.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: subColorViewXib.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: subColorViewXib.trailingAnchor).isActive = true
         view.delegate = self
     }
     
@@ -127,6 +137,12 @@ extension ImportantViewController: UITableViewDelegate, UITextFieldDelegate {
             self.viewBottomConstraint.constant = self.heightKeyboard!
             self.view.layoutIfNeeded()
         })
+    }
+    
+    // MARK: - Button Show Color View
+    @IBAction func btnShowColorView(_ sender: Any) {
+        subColorViewXib.isHidden = !subColorViewXib.isHidden
+        showColorViewXib()
     }
     
     //MARK: - Show Menu Sort
@@ -295,3 +311,12 @@ extension ImportantViewController: ImportantMenuViewDelegate {
     }
 }
 
+// MARK: - Change Color Background
+extension ImportantViewController: SubColorViewDelegate {
+    func subColorView(_ view: SubColorView, didTapChangeBackgroundColorButtonWith color: UIColor) {
+        self.view.backgroundColor = color
+    }
+    func subColorViewDidTapExitButton(_ view: SubColorView) {
+        subColorViewXib.isHidden = true
+    }
+}

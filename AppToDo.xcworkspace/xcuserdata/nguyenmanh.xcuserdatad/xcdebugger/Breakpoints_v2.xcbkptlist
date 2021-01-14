@@ -590,9 +590,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
-            landmarkName = "mydayTableViewCellChangeImageButtonImportant(_:_:_:)"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -606,9 +606,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "divDataToTwoList()"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -622,9 +622,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "divDataToTwoList()"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -638,9 +638,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "divDataToTwoList()"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -654,9 +654,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -670,9 +670,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
-            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -718,9 +718,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
-            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -734,9 +734,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
-            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -782,9 +782,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "372"
-            endingLineNumber = "372"
-            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -798,9 +798,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
-            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -814,9 +814,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
-            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -862,9 +862,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
-            landmarkName = "changeImageButtonComplete(_:_:_:)"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
+            landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -926,8 +926,8 @@
             filePath = "AppToDo/Important/ImportantViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "deleteAction(reminder:indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -942,8 +942,8 @@
             filePath = "AppToDo/Important/ImportantViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "deleteAction(reminder:indexPath:)"
             landmarkType = "7">
             <Locations>
@@ -990,10 +990,10 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "MyDayViewController"
-            landmarkType = "21">
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "deleteAction(reminder:indexPath:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1006,9 +1006,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "btnDidTapShowAddView(_:)"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "deleteAction(reminder:indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1022,9 +1022,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "deleteAction(reminder:indexPath:)"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "myDayDetailViewController(_:didTapDeleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1038,9 +1038,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "deleteAction(reminder:indexPath:)"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "myDayDetailViewController(_:didTapDeleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1054,10 +1054,10 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "MyDayViewController"
-            landmarkType = "21">
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "myDayDetailViewController(_:didTapDeleteButtonWith:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1070,9 +1070,9 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "btnDidTapShowSubMenuView(_:)"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "deleteAction(reminder:indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1086,8 +1086,8 @@
             filePath = "AppToDo/Planned/PlanViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "planAddView(_:didAddItemSuccessWith:)"
             landmarkType = "7">
             <Locations>
