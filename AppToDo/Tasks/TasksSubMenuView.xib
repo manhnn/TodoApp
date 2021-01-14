@@ -56,18 +56,18 @@
             <viewLayoutGuide key="safeArea" id="ivu-jT-dQn"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="8N2-XO-BrX" firstAttribute="height" secondItem="7l3-HS-Mg9" secondAttribute="height" multiplier="1/3" id="2aC-Ez-BF7"/>
                 <constraint firstItem="ivu-jT-dQn" firstAttribute="trailing" secondItem="YdX-vO-bsg" secondAttribute="trailing" id="3JP-yU-qEt"/>
                 <constraint firstItem="YdX-vO-bsg" firstAttribute="height" secondItem="7l3-HS-Mg9" secondAttribute="height" multiplier="1/3" id="9Q9-a2-YZd"/>
                 <constraint firstItem="z3d-8A-YgN" firstAttribute="leading" secondItem="ivu-jT-dQn" secondAttribute="leading" id="Bwp-NY-ys4"/>
-                <constraint firstItem="8N2-XO-BrX" firstAttribute="leading" secondItem="ivu-jT-dQn" secondAttribute="leading" id="DZz-VG-eUL"/>
                 <constraint firstItem="z3d-8A-YgN" firstAttribute="trailing" secondItem="ivu-jT-dQn" secondAttribute="trailing" id="E3O-sg-BOF"/>
                 <constraint firstItem="YdX-vO-bsg" firstAttribute="leading" secondItem="ivu-jT-dQn" secondAttribute="leading" id="FR9-XQ-LtX"/>
+                <constraint firstItem="8N2-XO-BrX" firstAttribute="top" secondItem="z3d-8A-YgN" secondAttribute="bottom" id="HZ3-oj-zqo"/>
+                <constraint firstItem="8N2-XO-BrX" firstAttribute="trailing" secondItem="ivu-jT-dQn" secondAttribute="trailing" id="Qor-9H-BS5"/>
                 <constraint firstItem="YdX-vO-bsg" firstAttribute="top" secondItem="ivu-jT-dQn" secondAttribute="top" id="UpG-ls-q4G"/>
-                <constraint firstItem="8N2-XO-BrX" firstAttribute="trailing" secondItem="ivu-jT-dQn" secondAttribute="trailing" id="YE9-F3-eQd"/>
-                <constraint firstItem="8N2-XO-BrX" firstAttribute="top" secondItem="z3d-8A-YgN" secondAttribute="bottom" id="Ya5-Je-KxQ"/>
                 <constraint firstItem="z3d-8A-YgN" firstAttribute="top" secondItem="YdX-vO-bsg" secondAttribute="bottom" id="gVv-C3-3xU"/>
                 <constraint firstItem="z3d-8A-YgN" firstAttribute="height" secondItem="7l3-HS-Mg9" secondAttribute="height" multiplier="1/3" id="jl7-Yv-Xop"/>
-                <constraint firstItem="8N2-XO-BrX" firstAttribute="bottom" secondItem="ivu-jT-dQn" secondAttribute="bottom" id="xsC-Oi-ti8"/>
+                <constraint firstItem="8N2-XO-BrX" firstAttribute="leading" secondItem="ivu-jT-dQn" secondAttribute="leading" id="t5j-Yi-mbZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1" y="7"/>

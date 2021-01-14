@@ -26,4 +26,8 @@ class TasksMenuView: UIView {
     @IBAction func btnSortByImportantAction(_ sender: Any) {
         delegate?.tasksMenuViewDidTapSortByImportantButton(self)
     }
+    @IBAction func btnChangeTheme(_ sender: Any) {
+        
+    }
+    
 }

@@ -35,6 +35,8 @@ class MyDayViewController: UIViewController {
         divDataToTwoList()
         
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        
     }
     
     // MARK: Get Height keyboard

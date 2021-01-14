@@ -20,6 +20,8 @@ class ImportantViewController: UIViewController {
     @IBOutlet weak var subMenuViewXib: UIView!
     @IBOutlet weak var subViewAddXib: UIView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     
@@ -32,6 +34,8 @@ class ImportantViewController: UIViewController {
         
         // MARK: - Notification
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        
     }
     
     // MARK: Get Height keyboard
