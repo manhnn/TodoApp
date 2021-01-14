@@ -15,7 +15,7 @@ protocol TasksDetailViewControllerDelegate {
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapSaveButtonWith reminder: Reminder)
 }
 
-class TasksDetailViewController: UIViewController, UITextViewDelegate {
+class TasksDetailViewController: UIViewController {
     // MARK: - UI
     @IBOutlet weak var btnComplete: UIButton!
     @IBOutlet weak var btnImportant: UIButton!
@@ -63,9 +63,11 @@ class TasksDetailViewController: UIViewController, UITextViewDelegate {
             btnAddToMyDay.setTitleColor(.black, for: .normal)
         }
         
-        txtNote.delegate = self
         txtNote.text = reminder.txtNote
-        txtNote.addDoneButtonOnKeyboard()
+        
+        let tapGesture = UITapGestureRecognizer()
+        self.view.addGestureRecognizer(tapGesture)
+        tapGesture.addTarget(self, action: #selector(tapGestureHiddenKeyboard))
     }
     
     // MARK: - Function set color
@@ -163,5 +165,9 @@ class TasksDetailViewController: UIViewController, UITextViewDelegate {
     @IBAction func btnDeleteReminder(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         delegate?.tasksDetailViewController(self, didTapDeleteButtonWith: reminder)
+    }
+    
+    @objc func tapGestureHiddenKeyboard() {
+        txtNote.resignFirstResponder()
     }
 }

@@ -22,6 +22,7 @@ class TasksViewController: UIViewController {
     @IBOutlet weak var subMenuViewXib: UIView!
     @IBOutlet weak var subViewAddXib: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -31,7 +32,6 @@ class TasksViewController: UIViewController {
         
         divDataToTwoListTasks()
         
-        // MARK: - Notification
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     

@@ -19,6 +19,7 @@ class ImportantViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var subMenuViewXib: UIView!
     @IBOutlet weak var subViewAddXib: UIView!
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     

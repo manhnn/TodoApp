@@ -22,6 +22,7 @@ class MyDayViewController: UIViewController {
     @IBOutlet weak var subViewAddReminder: UIView!
     @IBOutlet weak var subMenuView: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var lblDateNow: UILabel!
     
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
@@ -33,7 +34,6 @@ class MyDayViewController: UIViewController {
         
         divDataToTwoList()
         
-        // MARK: - Notification
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
