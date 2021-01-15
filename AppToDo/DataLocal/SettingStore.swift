@@ -22,7 +22,7 @@ class SettingStore {
                 }
             }
         }
-        return UIColor.systemGray6
+        return UIColor.init(red: 97 / 255, green: 111 / 255, blue: 255 / 255, alpha: 1)
     }
     
     func addSetting(setting: Setting) {

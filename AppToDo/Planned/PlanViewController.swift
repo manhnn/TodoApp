@@ -154,7 +154,7 @@ extension PlanViewController: UITableViewDelegate, UITextFieldDelegate {
     // MARK: - Edit Delete Button
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let reminder = listPlan[indexPath.row]
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") {action, indexPath in
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {action, indexPath in
             self.deleteAction(reminder: reminder, indexPath: indexPath)
         }
         deleteAction.backgroundColor = .systemGray5
@@ -162,15 +162,15 @@ extension PlanViewController: UITableViewDelegate, UITextFieldDelegate {
     }
     
     private func deleteAction(reminder: Reminder, indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Yes", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { [self] (action) in
             if let index = listPlan.firstIndex(where: {$0.id == reminder.id}) {
                 listPlan.remove(at: index)
                 tableView.reloadData()
             }
             ReminderStore.SharedInstance.removeReminder(reminder: reminder)
         }
-        let cancelAction = UIAlertAction(title: "No", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "No", style: .destructive, handler: nil)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         present(alert, animated: true)

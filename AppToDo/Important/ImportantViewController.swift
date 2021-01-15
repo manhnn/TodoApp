@@ -163,8 +163,8 @@ extension ImportantViewController: UITableViewDelegate, UITextFieldDelegate {
     }
     
     private func deleteAction(reminder: Reminder, indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Yes", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { [self] (action) in
             if let index = listImportant.firstIndex(where: {$0.id == reminder.id}) {
                 listImportant.remove(at: index)
                 tableView.reloadData()
@@ -181,8 +181,8 @@ extension ImportantViewController: UITableViewDelegate, UITextFieldDelegate {
 extension ImportantViewController: ImportantDetailViewControllerDelegate {
     // MARK: - Delete Reminder
     func importantDetailViewController(_ view: ImportantDetailViewController, didTapDeleteButtonOn reminder: Reminder) {
-        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Yes", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { [self] (action) in
             tableView.reloadData()
             if let index = listImportant.firstIndex(where: {$0.id == reminder.id}) {
                 listImportant.remove(at: index)
@@ -347,6 +347,6 @@ extension ImportantViewController: UIColorPickerViewControllerDelegate {
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.important.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.image.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.important.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.color.rawValue))
     }
 }

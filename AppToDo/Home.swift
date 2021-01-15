@@ -68,7 +68,6 @@ extension Home: UIImagePickerControllerDelegate, UINavigationControllerDelegate 
         let chosenImage:UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         self.view.backgroundColor = UIColor(patternImage: chosenImage)
         picker.dismiss(animated: true, completion: nil)
-        
     }
 }
 

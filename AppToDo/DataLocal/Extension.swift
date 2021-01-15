@@ -81,6 +81,21 @@ extension UIColor {
     var alphaValue: CGFloat{ return CIColor(color: self).alpha }
 }
 
+extension String {
+    // them gach ngang strikethroughStyle
+    func strikeThrough() -> NSAttributedString {
+        let attributeString =  NSMutableAttributedString(string: self)
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0,attributeString.length))
+        return attributeString
+    }
+    // bo gach ngang strikethroughColor
+    func unStrikeThrough() -> NSAttributedString {
+        let attributeString =  NSMutableAttributedString(string: self)
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughColor, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0,attributeString.length))
+        return attributeString
+    }
+}
+
 extension Date {
 
     func getDateOnlyToString(format: String = "yyyy-MM-dd") -> String {

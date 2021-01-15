@@ -175,7 +175,7 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
         showSubViewXib()
         
         UIView.animate(withDuration: 0.4, animations: {
-            self.viewBottomConstraint.constant = self.heightKeyboard!
+            self.viewBottomConstraint.constant = self.heightKeyboard ?? 315
             self.view.layoutIfNeeded()
         })
     }
@@ -195,7 +195,7 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
     // MARK: - Edit Delete Button
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let reminder = indexPath.section == 0 ? listUncomplete[indexPath.row] : listComplete[indexPath.row]
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") {action, indexPath in
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {action, indexPath in
             self.deleteAction(reminder: reminder, indexPath: indexPath)
         }
         deleteAction.backgroundColor = .systemGray5
@@ -203,8 +203,8 @@ extension TasksViewController: UITableViewDelegate, UITextFieldDelegate {
     }
     
     private func deleteAction(reminder: Reminder, indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Yes", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { [self] (action) in
             if !reminder.isComplete {
                 if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
                     listUncomplete.remove(at: index)

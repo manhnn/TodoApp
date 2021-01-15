@@ -51,7 +51,12 @@ class MyDayTableViewCell: UITableViewCell {
     
     // MARK: - Custom Cell
     func setupData(_ cell: Reminder) {
-        self.lblWork.text = cell.taskWorkName
+        if !cell.isComplete {
+            self.lblWork.attributedText = cell.taskWorkName.unStrikeThrough()
+        }
+        else {
+            self.lblWork.attributedText = cell.taskWorkName.strikeThrough()
+        }
         
         self.lblDateTime.text = cell.taskDueDate.toString()
         

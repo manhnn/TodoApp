@@ -29,7 +29,7 @@ class MyDayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: "MyDay")
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.myDay.rawValue)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -216,8 +216,8 @@ extension MyDayViewController: UITableViewDelegate, UITextFieldDelegate {
     }
     
     private func deleteAction(reminder: Reminder, indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Yes", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete reminder?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { [self] (action) in
             if !reminder.isComplete {
                 if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
                     listUncomplete.remove(at: index)
@@ -346,26 +346,29 @@ extension MyDayViewController: MyDayDetailViewControllerDelegate {
 }
 // MARK: - Extension MyDayTablewViewCell
 extension MyDayViewController: MyDayTableViewCellDelegate {
-    fileprivate func mydayTableViewCellChangeImageButtonImportant(_ index: Array<Reminder>.Index, _ reminder: Reminder, _ section: Int) {
-        if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? MyDayTableViewCell {
-            if reminder.isImportant {
-                cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
-            }
-            else {
-                cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
-            }
-        }
-    }
-    
     func myDayTableViewCell(_ view: MyDayTableViewCell, didTapImportantButtonWith reminder: Reminder) {
         reminder.isImportant = !reminder.isImportant
         ReminderStore.SharedInstance.updateReminder(reminder: reminder)
         
-        if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}){
-            myDayViewControllerChangeImageButtonImportant(index, reminder, SectionsType.complete.rawValue)
+        if let index = self.listComplete.firstIndex(where: {$0.id == reminder.id}) {
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.complete.rawValue)) as? MyDayTableViewCell {
+                if reminder.isImportant {
+                    cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
+                }
+                else {
+                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
+                }
+            }
         }
         else if let index = self.listUncomplete.firstIndex(where: {$0.id == reminder.id}) {
-            myDayViewControllerChangeImageButtonImportant(index, reminder, SectionsType.nonecomplete.rawValue)
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: SectionsType.nonecomplete.rawValue)) as? MyDayTableViewCell {
+                if reminder.isImportant {
+                    cell.btnImportant.setImage(UIImage(named: "star"), for: .normal)
+                }
+                else {
+                    cell.btnImportant.setImage(UIImage(named: "starred"), for: .normal)
+                }
+            }
         }
     }
     
@@ -373,9 +376,11 @@ extension MyDayViewController: MyDayTableViewCellDelegate {
         if let cell = tableView.cellForRow(at: IndexPath.init(row: index, section: section)) as? MyDayTableViewCell{
             if reminder.isComplete {
                 cell.btnComplete.setImage(UIImage(named: "check"), for: .normal)
+                cell.lblWork.attributedText = reminder.taskWorkName.strikeThrough()
             }
             else {
                 cell.btnComplete.setImage(UIImage(named: "rec"), for: .normal)
+                cell.lblWork.text = reminder.taskWorkName
             }
         }
     }

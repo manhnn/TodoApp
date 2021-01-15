@@ -590,8 +590,8 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -670,13 +670,13 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4B49EE04-FE41-460D-986E-2D493CDC53BF - 2aab5e9aaaa46ef7"
+                  uuid = "4B49EE04-FE41-460D-986E-2D493CDC53BF - 2aab5e9aaaa46e7b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -686,12 +686,12 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "386"
-                  endingLineNumber = "386"
+                  startingLineNumber = "390"
+                  endingLineNumber = "390"
                   offsetFromSymbolStart = "240">
                </Location>
                <Location
-                  uuid = "4B49EE04-FE41-460D-986E-2D493CDC53BF - 19c2cfd758d63e15"
+                  uuid = "4B49EE04-FE41-460D-986E-2D493CDC53BF - 19c2cfd758d63e99"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -701,8 +701,8 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "386"
-                  endingLineNumber = "386"
+                  startingLineNumber = "390"
+                  endingLineNumber = "390"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -718,8 +718,8 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -734,13 +734,13 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "31D0E982-FFCD-4AE2-B4D5-DF5B0D32E00E - 2aab5e9aaaa46e5a"
+                  uuid = "31D0E982-FFCD-4AE2-B4D5-DF5B0D32E00E - 2aab5e9aaaa46fde"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -750,12 +750,12 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "389"
-                  endingLineNumber = "389"
+                  startingLineNumber = "393"
+                  endingLineNumber = "393"
                   offsetFromSymbolStart = "508">
                </Location>
                <Location
-                  uuid = "31D0E982-FFCD-4AE2-B4D5-DF5B0D32E00E - dc406906e09ea0b9"
+                  uuid = "31D0E982-FFCD-4AE2-B4D5-DF5B0D32E00E - dc406906e09ea13d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -765,8 +765,8 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "389"
-                  endingLineNumber = "389"
+                  startingLineNumber = "393"
+                  endingLineNumber = "393"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -782,8 +782,8 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -798,8 +798,8 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -814,13 +814,13 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "14BB0513-7D0A-4DEE-AF8D-1E6D5D3DB51B - 2aab5e9aaaa46fff"
+                  uuid = "14BB0513-7D0A-4DEE-AF8D-1E6D5D3DB51B - 2aab5e9aaaa46c83"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -830,12 +830,12 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "394"
-                  endingLineNumber = "394"
+                  startingLineNumber = "398"
+                  endingLineNumber = "398"
                   offsetFromSymbolStart = "800">
                </Location>
                <Location
-                  uuid = "14BB0513-7D0A-4DEE-AF8D-1E6D5D3DB51B - 9ecf887608a70ae3"
+                  uuid = "14BB0513-7D0A-4DEE-AF8D-1E6D5D3DB51B - 9ecf887608a7099f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -845,8 +845,8 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "394"
-                  endingLineNumber = "394"
+                  startingLineNumber = "398"
+                  endingLineNumber = "398"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -862,13 +862,13 @@
             filePath = "AppToDo/MyDay/MyDayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "myDayTableViewCell(_:didTapCompleteButtonWith:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D49AC0C5-CAC5-4DFE-8C39-8ED32171B57F - 2aab5e9aaaa46cc1"
+                  uuid = "D49AC0C5-CAC5-4DFE-8C39-8ED32171B57F - 2aab5e9aaaa46c45"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -878,12 +878,12 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "400"
-                  endingLineNumber = "400"
+                  startingLineNumber = "404"
+                  endingLineNumber = "404"
                   offsetFromSymbolStart = "1256">
                </Location>
                <Location
-                  uuid = "D49AC0C5-CAC5-4DFE-8C39-8ED32171B57F - 514d2ba6516fffdc"
+                  uuid = "D49AC0C5-CAC5-4DFE-8C39-8ED32171B57F - 514d2ba6516fff58"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -893,8 +893,8 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "400"
-                  endingLineNumber = "400"
+                  startingLineNumber = "404"
+                  endingLineNumber = "404"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -910,8 +910,8 @@
             filePath = "AppToDo/Tasks/TasksDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "btnDeleteReminder(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -948,7 +948,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2AE976FA-9ED9-4CFE-AAF4-63DC73B61C4F - fa34db6be4e6a164"
+                  uuid = "2AE976FA-9ED9-4CFE-AAF4-63DC73B61C4F - fa34db6be4e6a143"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -958,12 +958,12 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/Important/ImportantViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
                   offsetFromSymbolStart = "84">
                </Location>
                <Location
-                  uuid = "2AE976FA-9ED9-4CFE-AAF4-63DC73B61C4F - 93198d1c89a06e69"
+                  uuid = "2AE976FA-9ED9-4CFE-AAF4-63DC73B61C4F - 93198d1c89a06e4e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -973,8 +973,8 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/Important/ImportantViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -1092,7 +1092,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B3D484C7-76F4-4C64-ADA5-E1B155EBBCCB - 48298fa1b124320c"
+                  uuid = "B3D484C7-76F4-4C64-ADA5-E1B155EBBCCB - 48298fa1b124322f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -1102,12 +1102,12 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/Planned/PlanViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "255"
-                  endingLineNumber = "255"
+                  startingLineNumber = "256"
+                  endingLineNumber = "256"
                   offsetFromSymbolStart = "884">
                </Location>
                <Location
-                  uuid = "B3D484C7-76F4-4C64-ADA5-E1B155EBBCCB - a0d24d0e26a3a313"
+                  uuid = "B3D484C7-76F4-4C64-ADA5-E1B155EBBCCB - a0d24d0e26a3a372"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -1117,8 +1117,8 @@
                   urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/Planned/PlanViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "256"
-                  endingLineNumber = "256"
+                  startingLineNumber = "257"
+                  endingLineNumber = "257"
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
@@ -1134,8 +1134,8 @@
             filePath = "AppToDo/Tasks/TasksDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "btnSaveAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1150,8 +1150,8 @@
             filePath = "AppToDo/Tasks/TasksDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "btnSaveAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1262,8 +1262,8 @@
             filePath = "AppToDo/Home.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "colorPickerViewControllerDidFinish(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1278,9 +1278,105 @@
             filePath = "AppToDo/Home.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "colorPickerViewControllerDidFinish(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C532D025-2BA8-42D9-BAC9-A769DCE27992"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppToDo/MyDay/MyDayViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A26F6694-1B88-4A80-BA99-37292D4B179F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppToDo/MyDay/MyDayViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "myDayTableViewCell(_:didTapImportantButtonWith:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A26F6694-1B88-4A80-BA99-37292D4B179F - ff7679134a0cedae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppToDo.MyDayViewController.myDayTableViewCell(_: AppToDo.MyDayTableViewCell, didTapImportantButtonWith: AppToDo.Reminder) -&gt; ()"
+                  moduleName = "AppToDo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "363"
+                  endingLineNumber = "363"
+                  offsetFromSymbolStart = "1928">
+               </Location>
+               <Location
+                  uuid = "A26F6694-1B88-4A80-BA99-37292D4B179F - 3264b83386e04e0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (AppToDo.Reminder) -&gt; Swift.Bool in AppToDo.MyDayViewController.myDayTableViewCell(_: AppToDo.MyDayTableViewCell, didTapImportantButtonWith: AppToDo.Reminder) -&gt; ()"
+                  moduleName = "AppToDo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nguyenmanh/Documents/Learn_iOS_Solar/thisistest/AppToDo/MyDay/MyDayViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "363"
+                  endingLineNumber = "363"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE931A06-07AB-481D-8DA6-148F7C030091"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppToDo/DataLocal/SettingStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "getBackgroundColor(idViewController:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66D9D2A4-5CC8-46EC-901C-1DE7171BA4FE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppToDo/DataLocal/SettingStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "getBackgroundColor(idViewController:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

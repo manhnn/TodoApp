@@ -33,7 +33,15 @@ class MyDayDetailViewController: UIViewController {
     // MARK: - Detail Reminder
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.myDay.rawValue)
 
+        if reminder.isComplete {
+            self.lblWork.attributedText = reminder.taskWorkName.strikeThrough()
+        }
+        else {
+            self.lblWork.attributedText = reminder.taskWorkName.unStrikeThrough()
+        }
+        
         self.lblWork.text = reminder.taskWorkName
         if reminder.taskDueDate != Date(timeIntervalSince1970: 0) {
             self.btnDueDate.setTitle("Due Date: \(reminder.taskDueDate.toString())", for: .normal)

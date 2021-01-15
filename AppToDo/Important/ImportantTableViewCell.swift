@@ -52,7 +52,13 @@ class ImportantTableViewCell: UITableViewCell {
     
     // MARK: - Custom Cell
     func setupData(_ cell: Reminder) {
-        self.lblWork.text = cell.taskWorkName
+        if !cell.isComplete {
+            self.lblWork.attributedText = cell.taskWorkName.unStrikeThrough()
+        }
+        else {
+            self.lblWork.attributedText = cell.taskWorkName.strikeThrough()
+        }
+        
         if cell.taskDueDate != Date(timeIntervalSince1970: 0) {
             self.lblDateTime.text = cell.taskDueDate.toString()
         }
