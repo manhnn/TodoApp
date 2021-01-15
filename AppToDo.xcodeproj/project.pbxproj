@@ -48,6 +48,9 @@
 		2586B875259F872200F6E6FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2586B873259F872200F6E6FE /* LaunchScreen.storyboard */; };
 		2586B880259F883300F6E6FE /* MyDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586B87F259F883300F6E6FE /* MyDayViewController.swift */; };
 		2586B884259F932E00F6E6FE /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586B883259F932E00F6E6FE /* Reminder.swift */; };
+		259DB1A225B1310800AA4F58 /* RLMSeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259DB1A125B1310800AA4F58 /* RLMSeting.swift */; };
+		259DB1A825B132BC00AA4F58 /* SettingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259DB1A725B132BC00AA4F58 /* SettingStore.swift */; };
+		259DB1AD25B1458E00AA4F58 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259DB1AC25B1458E00AA4F58 /* Setting.swift */; };
 		7BEBF961D013D4870F7AEBCE /* Pods_AppToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8AD8B60D638B112559068BD /* Pods_AppToDo.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +98,9 @@
 		2586B876259F872200F6E6FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2586B87F259F883300F6E6FE /* MyDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDayViewController.swift; sourceTree = "<group>"; };
 		2586B883259F932E00F6E6FE /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		259DB1A125B1310800AA4F58 /* RLMSeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMSeting.swift; sourceTree = "<group>"; };
+		259DB1A725B132BC00AA4F58 /* SettingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStore.swift; sourceTree = "<group>"; };
+		259DB1AC25B1458E00AA4F58 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		75DDC07A99E5B723EE0C8CDD /* Pods-AppToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppToDo.release.xcconfig"; path = "Target Support Files/Pods-AppToDo/Pods-AppToDo.release.xcconfig"; sourceTree = "<group>"; };
 		B59038B02E3352E6F9B6383B /* Pods-AppToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppToDo.debug.xcconfig"; path = "Target Support Files/Pods-AppToDo/Pods-AppToDo.debug.xcconfig"; sourceTree = "<group>"; };
 		E8AD8B60D638B112559068BD /* Pods_AppToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -219,10 +225,13 @@
 			isa = PBXGroup;
 			children = (
 				2555B26A25A8916F00373A1B /* Enum.swift */,
+				25733EE125AED2C200896A50 /* Extension.swift */,
 				2586B883259F932E00F6E6FE /* Reminder.swift */,
 				2552EA7A25AC2BD400DE324A /* RLMReminder.swift */,
 				2552EA7725ABFF2100DE324A /* ReminderStore.swift */,
-				25733EE125AED2C200896A50 /* Extension.swift */,
+				259DB1AC25B1458E00AA4F58 /* Setting.swift */,
+				259DB1A125B1310800AA4F58 /* RLMSeting.swift */,
+				259DB1A725B132BC00AA4F58 /* SettingStore.swift */,
 			);
 			path = DataLocal;
 			sourceTree = "<group>";
@@ -373,6 +382,7 @@
 				2552EA7825ABFF2100DE324A /* ReminderStore.swift in Sources */,
 				256E2BB425A4BA4500E15475 /* MyDayTableViewCell.swift in Sources */,
 				25560AF025AA1F3200E92154 /* ImportantMenuView.swift in Sources */,
+				259DB1AD25B1458E00AA4F58 /* Setting.swift in Sources */,
 				256C70B625A7F8350099BBFC /* TasksAddView.swift in Sources */,
 				2555B27525A8B1FA00373A1B /* TasksMenuView.swift in Sources */,
 				25560AE225AA15F400E92154 /* ImportantViewController.swift in Sources */,
@@ -390,9 +400,11 @@
 				256C70B325A7F3BE0099BBFC /* TasksTableViewCell.swift in Sources */,
 				2574013925B0A0DE0077FB70 /* SubColorView.swift in Sources */,
 				25036E7A25A5713B00511E62 /* MyDayAddView.swift in Sources */,
+				259DB1A825B132BC00AA4F58 /* SettingStore.swift in Sources */,
 				2586B880259F883300F6E6FE /* MyDayViewController.swift in Sources */,
 				25733EE225AED2C200896A50 /* Extension.swift in Sources */,
 				2544C91F25AD4FA600836F83 /* PlanViewController.swift in Sources */,
+				259DB1A225B1310800AA4F58 /* RLMSeting.swift in Sources */,
 				25560AEA25AA1EB800E92154 /* ImportantTableViewCell.swift in Sources */,
 				256C70AF25A7F08B0099BBFC /* TasksViewController.swift in Sources */,
 				25560AED25AA1F1300E92154 /* ImportantAddView.swift in Sources */,

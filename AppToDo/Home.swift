@@ -8,67 +8,78 @@
 import UIKit
 
 class Home: UIViewController {
-    @IBOutlet var mainView: UIView!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var subColorViewXib: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: "Home")
         
         let tapGesture = UITapGestureRecognizer()
-        self.mainView.addGestureRecognizer(tapGesture)
+        self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenColorView))
     }
     
+    // MARK: - Show SubColorView.xib
+    func showColorViewXib() {
+        let nib = UINib(nibName: "SubColorView", bundle: nil)
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! SubColorView
+        view.frame = subColorViewXib.bounds
+        subColorViewXib.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: subColorViewXib.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: subColorViewXib.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: subColorViewXib.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: subColorViewXib.trailingAnchor).isActive = true
+        view.delegate = self
+    }
+    
     @objc func tapGestureHiddenColorView() {
-        colorView.isHidden = true
+        subColorViewXib.isHidden = true
     }
     
     @IBAction func changeThemeButton(_ sender: Any) {
-        colorView.isHidden = false
+        subColorViewXib.isHidden = false
+        showColorViewXib()
+    }
+}
+
+extension Home: SubColorViewDelegate {
+    func subColorViewDidTapSelectColor(_ view: SubColorView) {
+        let picker = UIColorPickerViewController()
+        picker.selectedColor = self.view.backgroundColor!
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
     
-    @IBAction func selectPhotoFromDevice(_ sender: Any) {
+    func subColorViewDidTapSelectImageFromDeviceButton(_ view: SubColorView) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true
         pickerController.sourceType = .photoLibrary
         self.present(pickerController, animated: true, completion: nil)
     }
-    
-    @IBAction func changeColorPurple(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 97 / 255, green: 111 / 255, blue: 185 / 255, alpha: 1)
-    }
-    
-    @IBAction func changeColorDarkGreen(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 68 / 255, green: 118 / 255, blue: 124 / 255, alpha: 1)
-    }
-    
-    @IBAction func changeColorCyan(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 86 / 255, green: 185 / 255, blue: 248 / 255, alpha: 1)
-    }
-    
-    @IBAction func changeColorOrange(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 255 / 255, green: 117 / 255, blue: 95 / 255, alpha: 1)
-    }
-    
-    @IBAction func changeColorPink(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 251 / 255, green: 229 / 255, blue: 233 / 255, alpha: 1)
-    }
-    
-    @IBAction func changeColorLightGreen(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 218 / 255, green: 240 / 255, blue: 239 / 255, alpha: 1)
-    }
-    
-    @IBAction func changeColorGray(_ sender: Any) {
-        mainView.backgroundColor = UIColor.init(displayP3Red: 242 / 255, green: 242 / 255, blue: 247 / 255, alpha: 1)
+    func subColorViewDidTapExitButton(_ view: SubColorView) {
+        subColorViewXib.isHidden = true
     }
 }
 
 extension Home: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let chosenImage:UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
-        mainView.backgroundColor = UIColor(patternImage: chosenImage)
+        self.view.backgroundColor = UIColor(patternImage: chosenImage)
         picker.dismiss(animated: true, completion: nil)
+        
+    }
+}
+
+extension Home: UIColorPickerViewControllerDelegate {
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        self.view.backgroundColor = viewController.selectedColor
+    }
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        self.view.backgroundColor = viewController.selectedColor
+        
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: "Home", colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: "color"))
     }
 }
 

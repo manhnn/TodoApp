@@ -23,7 +23,6 @@ class TasksViewController: UIViewController {
     @IBOutlet weak var subViewAddXib: UIView!
     @IBOutlet weak var subColorViewXib: UIView!
     @IBOutlet weak var btnHiddenSubView: UIButton!
-    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -463,10 +462,42 @@ extension TasksViewController: TasksMenuViewDelegate {
 
 // MARK: - Change Color Background
 extension TasksViewController: SubColorViewDelegate {
+    func subColorViewDidTapSelectColor(_ view: SubColorView) {
+        let picker = UIColorPickerViewController()
+        picker.selectedColor = self.view.backgroundColor!
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    func subColorViewDidTapSelectImageFromDeviceButton(_ view: SubColorView) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = .photoLibrary
+        self.present(pickerController, animated: true, completion: nil)
+    }
+    
     func subColorView(_ view: SubColorView, didTapChangeBackgroundColorButtonWith color: UIColor) {
         self.view.backgroundColor = color
     }
     func subColorViewDidTapExitButton(_ view: SubColorView) {
         subColorViewXib.isHidden = true
+    }
+}
+
+extension TasksViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let chosenImage:UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        self.view.backgroundColor = UIColor(patternImage: chosenImage)
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension TasksViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        self.view.backgroundColor = viewController.selectedColor
+    }
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        self.view.backgroundColor = viewController.selectedColor
     }
 }
