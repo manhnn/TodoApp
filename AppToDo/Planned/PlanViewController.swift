@@ -25,6 +25,7 @@ class PlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.plan.rawValue)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -133,7 +134,7 @@ extension PlanViewController: UITableViewDelegate, UITextFieldDelegate {
         showSubViewXib()
         
         UIView.animate(withDuration: 0.4, animations: {
-            self.viewBottomConstraint.constant = self.heightKeyboard!
+            self.viewBottomConstraint.constant = self.heightKeyboard ?? 315.0
             self.view.layoutIfNeeded()
         })
     }
@@ -346,5 +347,6 @@ extension PlanViewController: UIColorPickerViewControllerDelegate {
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.plan.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.color.rawValue))
     }
 }

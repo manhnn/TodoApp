@@ -29,6 +29,7 @@ class MyDayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: "MyDay")
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -508,5 +509,6 @@ extension MyDayViewController: UIColorPickerViewControllerDelegate {
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: "MyDay", colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: "color"))
     }
 }

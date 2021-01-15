@@ -25,6 +25,7 @@ class ImportantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.important.rawValue)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -327,10 +328,6 @@ extension ImportantViewController: SubColorViewDelegate {
         pickerController.sourceType = .photoLibrary
         self.present(pickerController, animated: true, completion: nil)
     }
-    
-    func subColorView(_ view: SubColorView, didTapChangeBackgroundColorButtonWith color: UIColor) {
-        self.view.backgroundColor = color
-    }
     func subColorViewDidTapExitButton(_ view: SubColorView) {
         subColorViewXib.isHidden = true
     }
@@ -350,5 +347,6 @@ extension ImportantViewController: UIColorPickerViewControllerDelegate {
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.important.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.image.rawValue))
     }
 }

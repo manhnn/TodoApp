@@ -27,6 +27,7 @@ class TasksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.tasks.rawValue)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -499,5 +500,6 @@ extension TasksViewController: UIColorPickerViewControllerDelegate {
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.tasks.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.color.rawValue))
     }
 }

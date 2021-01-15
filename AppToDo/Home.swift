@@ -12,7 +12,7 @@ class Home: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: "Home")
+        self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.home.rawValue)
         
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
@@ -79,7 +79,7 @@ extension Home: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
         
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: "Home", colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: "color"))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.home.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.color.rawValue))
     }
 }
 

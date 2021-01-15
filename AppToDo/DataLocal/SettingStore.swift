@@ -14,10 +14,10 @@ class SettingStore {
         let listSetting = realm.objects(RLMSetting.self)
         for obj in listSetting {
             if obj.idViewController == idViewController {
-                if obj.status == "color" {
+                if obj.status == StatusType.color.rawValue {
                     return UIColor.init(ciColor: CIColor.init(red: CGFloat(obj.colorRed), green: CGFloat(obj.colorGreen), blue: CGFloat(obj.colorBlue), alpha: CGFloat(obj.alpha)))
                 }
-                if obj.status == "image" {
+                if obj.status == StatusType.image.rawValue {
                     return UIColor.init(patternImage: UIImage(named: obj.imageName)!)
                 }
             }
@@ -41,12 +41,12 @@ class SettingStore {
         for obj in rlmSettingInRealm {
             if obj.idViewController == setting.idViewController {
                 try! realm.write {
-                    if obj.status == "color" {
+                    if obj.status == StatusType.color.rawValue {
                         obj.colorRed = setting.colorRed
                         obj.colorGreen = setting.colorGreen
                         obj.colorBlue = setting.colorBlue
                     }
-                    if obj.status == "image"
+                    if obj.status == StatusType.image.rawValue
                     {
                         obj.imageName = setting.imageName
                     }
