@@ -302,12 +302,12 @@ extension ImportantViewController: ImportantMenuViewDelegate {
     }
     
     func importantMenuViewDidTapSortByNameButton(_ view: ImportantMenuView) {
-        let listSortDataByName = ReminderStore.SharedInstance.getListReminderSortByName()
+        let listSortDataByName = ReminderStore.SharedInstance.getListReminderOnlyImportantOptionSortByName()
         setupReminderToListShow(listSortDataByName)
     }
     
     func importantMenuViewDidTapSortByDateTimeButton(_ view: ImportantMenuView) {
-        let listSortDataByDateTime = ReminderStore.SharedInstance.getListReminderSortByDateTime()
+        let listSortDataByDateTime = ReminderStore.SharedInstance.getListReminderOnlyImportantOptionSortByDate()
         setupReminderToListShow(listSortDataByDateTime)
     }
 }

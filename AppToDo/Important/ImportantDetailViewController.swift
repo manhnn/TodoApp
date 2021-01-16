@@ -102,9 +102,11 @@ class ImportantDetailViewController: UIViewController {
         
         if reminder.isComplete {
             btnComplete.setImage(UIImage(named: "checkred"), for: .normal)
+            lblWork.attributedText = reminder.taskWorkName.strikeThrough()
         }
         else {
             btnComplete.setImage(UIImage(named: "recred"), for: .normal)
+            lblWork.attributedText = reminder.taskWorkName.unStrikeThrough()
         }
     }
     

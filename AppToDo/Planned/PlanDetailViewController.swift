@@ -99,9 +99,11 @@ class PlanDetailViewController: UIViewController {
         
         if reminder.isComplete {
             btnComplete.setImage(UIImage(named: "check"), for: .normal)
+            lblWork.attributedText = reminder.taskWorkName.strikeThrough()
         }
         else {
             btnComplete.setImage(UIImage(named: "recgreen"), for: .normal)
+            lblWork.attributedText = reminder.taskWorkName.unStrikeThrough()
         }
     }
     

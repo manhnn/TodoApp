@@ -99,9 +99,11 @@ class TasksDetailViewController: UIViewController {
         
         if reminder.isComplete {
             btnComplete.setImage(UIImage(named: "checkblack"), for: .normal)
+            lblWork.attributedText = reminder.taskWorkName.strikeThrough()
         }
         else {
             btnComplete.setImage(UIImage(named: "recblack"), for: .normal)
+            lblWork.attributedText = reminder.taskWorkName.unStrikeThrough()
         }
     }
     

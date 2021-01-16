@@ -10,7 +10,7 @@ import UIKit
 class PlanViewController: UIViewController {
     
     // MARK: - Realm
-    var listReminder = ReminderStore.SharedInstance.getListReminderHaveDueDate()
+    var listReminder = ReminderStore.SharedInstance.getListReminderInPlan()
     
     var listPlan = [Reminder]()
     var heightKeyboard: CGFloat?
