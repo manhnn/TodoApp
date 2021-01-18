@@ -479,7 +479,7 @@ extension MyDayViewController: MyDaySubMenuViewDelegate {
 extension MyDayViewController: SubColorViewDelegate {
     func subColorViewDidTapSelectColor(_ view: SubColorView) {
         let picker = UIColorPickerViewController()
-        picker.selectedColor = self.view.backgroundColor!
+        //picker.selectedColor = self.view.backgroundColor!
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
@@ -511,7 +511,7 @@ extension MyDayViewController: UIImagePickerControllerDelegate, UINavigationCont
             }
         }
         
-        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        let url = NSURL.fileURL(withPath: directory + "/mydaybackground.jpg")
         return url
     }
     
@@ -539,7 +539,7 @@ extension MyDayViewController: UIImagePickerControllerDelegate, UINavigationCont
             print(error)
         }
         
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.myDay.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.myDay.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "mydaybackground.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 

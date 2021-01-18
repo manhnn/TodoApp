@@ -312,7 +312,7 @@ extension PlanViewController: PlanMenuViewDelegate {
 extension PlanViewController: SubColorViewDelegate {
     func subColorViewDidTapSelectColor(_ view: SubColorView) {
         let picker = UIColorPickerViewController()
-        picker.selectedColor = self.view.backgroundColor!
+        //picker.selectedColor = self.view.backgroundColor!
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
@@ -344,7 +344,7 @@ extension PlanViewController: UIImagePickerControllerDelegate, UINavigationContr
             }
         }
         
-        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        let url = NSURL.fileURL(withPath: directory + "/planbackground.jpg")
         return url
     }
     
@@ -372,7 +372,7 @@ extension PlanViewController: UIImagePickerControllerDelegate, UINavigationContr
             print(error)
         }
         
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.plan.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.plan.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "planbackground.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 

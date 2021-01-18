@@ -316,7 +316,7 @@ extension ImportantViewController: ImportantMenuViewDelegate {
 extension ImportantViewController: SubColorViewDelegate {
     func subColorViewDidTapSelectColor(_ view: SubColorView) {
         let picker = UIColorPickerViewController()
-        picker.selectedColor = self.view.backgroundColor!
+        //picker.selectedColor = self.view.backgroundColor!
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
@@ -344,7 +344,7 @@ extension ImportantViewController: UIImagePickerControllerDelegate, UINavigation
             }
         }
         
-        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        let url = NSURL.fileURL(withPath: directory + "/importantbackground.jpg")
         return url
     }
     
@@ -372,7 +372,7 @@ extension ImportantViewController: UIImagePickerControllerDelegate, UINavigation
             print(error)
         }
         
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.important.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.important.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "importantbackground.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 

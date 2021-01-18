@@ -50,7 +50,7 @@ class Home: UIViewController {
 extension Home: SubColorViewDelegate {
     func subColorViewDidTapSelectColor(_ view: SubColorView) {
         let picker = UIColorPickerViewController()
-        picker.selectedColor = self.view.backgroundColor!
+        //picker.selectedColor = self.view.backgroundColor!
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
@@ -80,7 +80,7 @@ extension Home: UIImagePickerControllerDelegate, UINavigationControllerDelegate 
             }
         }
         
-        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        let url = NSURL.fileURL(withPath: directory + "/homebackground.jpg")
         return url
     }
     
@@ -108,7 +108,7 @@ extension Home: UIImagePickerControllerDelegate, UINavigationControllerDelegate 
             print(error)
         }
         
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.home.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.home.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "homebackground.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 

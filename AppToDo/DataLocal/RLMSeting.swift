@@ -18,14 +18,14 @@ class RLMSetting: Object {
     @objc dynamic var imagePath = ""
     @objc dynamic var status = ""
     
-    convenience init(idViewController: String, colorRed: Float, colorGreen: Float, colorBlue: Float, alpha: Float, imageName: String, status: String) {
+    convenience init(idViewController: String, colorRed: Float, colorGreen: Float, colorBlue: Float, alpha: Float, imagePath: String, status: String) {
         self.init()
         self.idViewController = idViewController
         self.colorRed = colorRed
         self.colorGreen = colorGreen
         self.colorBlue = colorBlue
         self.alpha = alpha
-        self.imagePath = imageName
+        self.imagePath = imagePath
         self.status = status
     }
 }

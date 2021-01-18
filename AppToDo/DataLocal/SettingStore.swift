@@ -47,7 +47,7 @@ class SettingStore {
     }
     
     func addSetting(setting: Setting) {
-        let rlmSetting = RLMSetting.init(idViewController: setting.idViewController, colorRed: setting.colorRed, colorGreen: setting.colorGreen, colorBlue: setting.colorBlue, alpha: setting.alpha, imageName: setting.imageName, status: setting.status)
+        let rlmSetting = RLMSetting.init(idViewController: setting.idViewController, colorRed: setting.colorRed, colorGreen: setting.colorGreen, colorBlue: setting.colorBlue, alpha: setting.alpha, imagePath: setting.imageName, status: setting.status)
         
         let realm = try! Realm()
         realm.beginWrite()

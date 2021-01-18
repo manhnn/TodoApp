@@ -465,7 +465,7 @@ extension TasksViewController: TasksMenuViewDelegate {
 extension TasksViewController: SubColorViewDelegate {
     func subColorViewDidTapSelectColor(_ view: SubColorView) {
         let picker = UIColorPickerViewController()
-        picker.selectedColor = self.view.backgroundColor!
+        //picker.selectedColor = self.view.backgroundColor!
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
@@ -498,7 +498,7 @@ extension TasksViewController: UIImagePickerControllerDelegate, UINavigationCont
             }
         }
         
-        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        let url = NSURL.fileURL(withPath: directory + "/tasksbackground.jpg")
         return url
     }
     
@@ -526,7 +526,7 @@ extension TasksViewController: UIImagePickerControllerDelegate, UINavigationCont
             print(error)
         }
         
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.tasks.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.tasks.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "tasksbackground.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 
@@ -536,6 +536,6 @@ extension TasksViewController: UIColorPickerViewControllerDelegate {
     }
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.view.backgroundColor = viewController.selectedColor
-        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.tasks.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.color.rawValue))
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.tasks.rawValue, colorRed: Float(viewController.selectedColor.redValue), colorGreen: Float(viewController.selectedColor.greenValue), colorBlue: Float(viewController.selectedColor.blueValue), imageName: "tasksbackground.jpg", alpha: Float(viewController.selectedColor.alphaValue), status: StatusType.color.rawValue))
     }
 }
