@@ -334,10 +334,45 @@ extension PlanViewController: SubColorViewDelegate {
 }
 
 extension PlanViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func makeURLImageToDocument() -> URL {
+        let directory = NSHomeDirectory().appending("/Documents")
+        if !FileManager.default.fileExists(atPath: directory)  {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directory), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        return url
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let chosenImage:UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         self.view.backgroundColor = UIColor(patternImage: chosenImage)
         picker.dismiss(animated: true, completion: nil)
+        
+        let url = makeURLImageToDocument()
+        
+        // Load image from URL
+        do {
+            try chosenImage.jpegData(compressionQuality: 1)?.write(to: url, options: .atomic)
+        }
+        catch {
+            print(error)
+        }
+        
+        do {
+            let url = URL(string: url.relativeString)
+            let data = try Data(contentsOf: url!)
+            self.view.backgroundColor = UIColor(patternImage: UIImage(data: data)!)
+        }
+        catch{
+            print(error)
+        }
+        
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.plan.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 

@@ -9,6 +9,27 @@ import Foundation
 import RealmSwift
 
 class SettingStore {
+    fileprivate func makeLinkURLFromUIImage(_ obj: RLMSetting) -> UIColor {
+        let dir = NSHomeDirectory().appending("/Documents")
+        if !FileManager.default.fileExists(atPath: dir)  {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: dir), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let url = NSURL.fileURL(withPath: dir + "/" + obj.imagePath)
+        do {
+            let data = try Data(contentsOf: url)
+            return UIColor.init(patternImage: UIImage(data: data)!)
+        }
+        catch{
+            print(error)
+        }
+        return UIColor.init(red: 97 / 255, green: 111 / 255, blue: 255 / 255, alpha: 1)
+    }
+    
     func getBackgroundColor(idViewController: String) -> UIColor {
         let realm = try! Realm()
         let listSetting = realm.objects(RLMSetting.self)
@@ -18,7 +39,7 @@ class SettingStore {
                     return UIColor.init(ciColor: CIColor.init(red: CGFloat(obj.colorRed), green: CGFloat(obj.colorGreen), blue: CGFloat(obj.colorBlue), alpha: CGFloat(obj.alpha)))
                 }
                 if obj.status == StatusType.image.rawValue {
-                    return UIColor.init(patternImage: UIImage(named: obj.imageName)!)
+                    return makeLinkURLFromUIImage(obj)
                 }
             }
         }
@@ -41,14 +62,23 @@ class SettingStore {
         for obj in rlmSettingInRealm {
             if obj.idViewController == setting.idViewController {
                 try! realm.write {
+                    obj.status = setting.status
+                }
+            }
+        }
+        
+        for obj in rlmSettingInRealm {
+            if obj.idViewController == setting.idViewController {
+                try! realm.write {
                     if obj.status == StatusType.color.rawValue {
                         obj.colorRed = setting.colorRed
                         obj.colorGreen = setting.colorGreen
                         obj.colorBlue = setting.colorBlue
+                        obj.alpha = setting.alpha
                     }
                     if obj.status == StatusType.image.rawValue
                     {
-                        obj.imageName = setting.imageName
+                        obj.imagePath = setting.imageName
                     }
                 }
                 return

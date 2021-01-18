@@ -12,12 +12,16 @@ class Home: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = SettingStore.SharedInstance.getBackgroundColor(idViewController: ViewControllerType.home.rawValue)
+        
         
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenColorView))
     }
+    
+    
     
     // MARK: - Show SubColorView.xib
     func showColorViewXib() {
@@ -58,16 +62,53 @@ extension Home: SubColorViewDelegate {
         pickerController.sourceType = .photoLibrary
         self.present(pickerController, animated: true, completion: nil)
     }
+    
     func subColorViewDidTapExitButton(_ view: SubColorView) {
         subColorViewXib.isHidden = true
     }
 }
 
 extension Home: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func makeURLImageToDocument() -> URL {
+        let directory = NSHomeDirectory().appending("/Documents")
+        if !FileManager.default.fileExists(atPath: directory)  {
+            do {
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directory), withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let url = NSURL.fileURL(withPath: directory + "/background.jpg")
+        return url
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let chosenImage:UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         self.view.backgroundColor = UIColor(patternImage: chosenImage)
         picker.dismiss(animated: true, completion: nil)
+        
+        let url = makeURLImageToDocument()
+        
+        // Load image from URL
+        do {
+            try chosenImage.jpegData(compressionQuality: 1)?.write(to: url, options: .atomic)
+        }
+        catch {
+            print(error)
+        }
+        
+        do {
+            let url = URL(string: url.relativeString)
+            let data = try Data(contentsOf: url!)
+            self.view.backgroundColor = UIColor(patternImage: UIImage(data: data)!)
+        }
+        catch{
+            print(error)
+        }
+        
+        SettingStore.SharedInstance.updateSetting(setting: Setting.init(idViewController: ViewControllerType.home.rawValue, colorRed: 0, colorGreen: 0, colorBlue: 0, imageName: "background.jpg", alpha: 0, status: StatusType.image.rawValue))
     }
 }
 
