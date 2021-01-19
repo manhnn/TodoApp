@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SubColorViewDelegate:AnyObject {
+protocol SubColorViewDelegate: class {
     func subColorViewDidTapSelectImageFromDeviceButton(_ view: SubColorView)
     func subColorViewDidTapSelectColor(_ view: SubColorView)
     func subColorViewDidTapExitButton(_ view: SubColorView)
