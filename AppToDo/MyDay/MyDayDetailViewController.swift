@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MyDayDetailViewControllerDelegate {
+protocol MyDayDetailViewControllerDelegate: class {
     func myDayDetailViewController(_ view: MyDayDetailViewController, didTapCompleteButtonWith reminder: Reminder)
     func myDayDetailViewController(_ view: MyDayDetailViewController, didTapImportantButtonWith reminder: Reminder)
     func myDayDetailViewController(_ view: MyDayDetailViewController, didTapDeleteButtonWith reminder: Reminder)
@@ -26,7 +26,7 @@ class MyDayDetailViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     // MARK: - Property
-    var delegate: MyDayDetailViewControllerDelegate?
+    weak var delegate: MyDayDetailViewControllerDelegate?
     var reminder: Reminder!
     var heightKeyboard: CGFloat?
     
@@ -77,6 +77,10 @@ class MyDayDetailViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenKeyboard))
+    }
+    
+    deinit {
+        print("my day detail vc is deinited")
     }
     
     // MARK: - Function set color

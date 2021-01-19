@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PlanAddViewDelegate {
+protocol PlanAddViewDelegate: class {
     func planAddView(_ view: PlanAddView, didAddItemSuccessWith reminder: Reminder)
     func planAddViewDidAddItemFail(_ view: PlanAddView)
     func planAddViewDidTapDoneButtonOnKeyboard(_ view: PlanAddView)
@@ -22,7 +22,11 @@ class PlanAddView: UIView, UITextFieldDelegate {
     
     var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: false, isAddToMyDay: true, txtNote: "Add notes...")
     
-    public var delegate: PlanAddViewDelegate?
+    weak var delegate: PlanAddViewDelegate?
+    
+    deinit {
+        print("plan add view deinited")
+    }
     
     // MARK: - Buttons Action
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

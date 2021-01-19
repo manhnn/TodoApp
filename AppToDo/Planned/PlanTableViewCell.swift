@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PlanTableViewCellDelegate {
+protocol PlanTableViewCellDelegate: class {
     func planTableViewCell(_ view: PlanTableViewCell, didTapCompleteButtonWith reminder: Reminder)
     func planTableViewCell(_ view: PlanTableViewCell, didTapImportantButtonWith reminder: Reminder)
 }
@@ -22,7 +22,7 @@ class PlanTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var subView: UIView!
     
-    var delegate: PlanTableViewCellDelegate?
+    weak var delegate: PlanTableViewCellDelegate?
     var reminder: Reminder?
     
     override func awakeFromNib() {
@@ -31,6 +31,10 @@ class PlanTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    deinit {
+        print("plan cell is deinited")
     }
     
     // MARK: - Set color for lblDateTime

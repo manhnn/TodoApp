@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TasksAddViewDelegate {
+protocol TasksAddViewDelegate: class {
     func tasksAddView(_ view: TasksAddView, didAddItemSuccessWith reminder: Reminder)
     func tasksAddViewDidAddItemFail(_ view: TasksAddView)
     func tasksAddViewDidTapDoneButtonOnKeyboard(_ view: TasksAddView)
@@ -22,7 +22,7 @@ class TasksAddView: UIView, UITextFieldDelegate {
     
     var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: false, isAddToMyDay: true, txtNote: "Add notes...")
     
-    public var delegate: TasksAddViewDelegate?
+    weak var delegate: TasksAddViewDelegate?
 
     // MARK: - Buttons Action
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

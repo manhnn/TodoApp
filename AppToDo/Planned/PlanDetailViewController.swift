@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PlanDetailViewControllerDelegate {
+protocol PlanDetailViewControllerDelegate: class {
     func planDetailViewController(_ view: PlanDetailViewController, didTapCompleteButtonOn reminder: Reminder)
     func planDetailViewController(_ view: PlanDetailViewController, didTapImportantButtonOn reminder: Reminder)
     func planDetailViewController(_ view: PlanDetailViewController, didTapDeleteButtonOn reminder: Reminder)
@@ -26,7 +26,7 @@ class PlanDetailViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     // MARK: - Property
-    var delegate: PlanDetailViewControllerDelegate?
+    weak var delegate: PlanDetailViewControllerDelegate?
     var reminder: Reminder!
     
     // MARK: - Detail Reminder
@@ -75,6 +75,10 @@ class PlanDetailViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenKeyboard))
+    }
+    
+    deinit {
+        print("plan detail is deinited")
     }
     
     // MARK: - Function set color

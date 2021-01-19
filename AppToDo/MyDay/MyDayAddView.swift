@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MyDayAddViewDelegate {
+protocol MyDayAddViewDelegate: class {
     func myDayAddView(_ view: MyDayAddView, didAddItemSuccessWith reminder: Reminder)
     func myDayAddViewDidAddItemFail(_ view: MyDayAddView)
     func myDayAddViewDidTapDoneButtonOnKeyboard(_ view: MyDayAddView)
@@ -21,7 +21,7 @@ class MyDayAddView: UIView, UITextFieldDelegate {
     @IBOutlet weak var setDueDateButton: UIButton!
     
     var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: false, isAddToMyDay: true, txtNote: "Add notes...")
-    public var delegate: MyDayAddViewDelegate?
+    weak var delegate: MyDayAddViewDelegate?
 
     // MARK: - Buttons Action
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -31,6 +31,10 @@ class MyDayAddView: UIView, UITextFieldDelegate {
     
     override func awakeFromNib() {
         //print("load")
+    }
+    
+    deinit {
+        print("myday add is deinited")
     }
     
     @IBAction func setDueDateButtonAction(_ sender: Any) {

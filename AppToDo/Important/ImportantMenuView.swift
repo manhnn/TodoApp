@@ -7,14 +7,18 @@
 
 import UIKit
 
-protocol ImportantMenuViewDelegate {
+protocol ImportantMenuViewDelegate: class {
     func importantMenuViewDidTapSortByNameButton(_ view: ImportantMenuView)
     func importantMenuViewDidTapSortByDateTimeButton(_ view: ImportantMenuView)
 }
 
 class ImportantMenuView: UIView {
  
-    var delegate: ImportantMenuViewDelegate?
+    weak var delegate: ImportantMenuViewDelegate?
+    
+    deinit {
+        print("important menu view is deinited")
+    }
 
     @IBAction func btnSortByNameAction(_ sender: Any) {
         delegate?.importantMenuViewDidTapSortByNameButton(self)

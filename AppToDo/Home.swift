@@ -20,8 +20,10 @@ class Home: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenColorView))
     }
-    
-    
+
+    deinit {
+        print("HOME DEINITED")
+    }
     
     // MARK: - Show SubColorView.xib
     func showColorViewXib() {
@@ -36,6 +38,14 @@ class Home: UIViewController {
         view.trailingAnchor.constraint(equalTo: subColorViewXib.trailingAnchor).isActive = true
         view.delegate = self
     }
+    
+    // MARK: - Buttons Action
+    @IBAction func showTasksViewControllerButton(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let tasksViewController = storyBoard.instantiateViewController(identifier: "TasksViewController") as! TasksViewController
+        navigationController?.pushViewController(tasksViewController, animated: true)
+    }
+    
     
     @objc func tapGestureHiddenColorView() {
         subColorViewXib.isHidden = true

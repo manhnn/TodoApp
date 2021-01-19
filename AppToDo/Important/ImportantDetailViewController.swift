@@ -8,7 +8,7 @@
 import RealmSwift
 import UIKit
 
-protocol ImportantDetailViewControllerDelegate {
+protocol ImportantDetailViewControllerDelegate: class {
     func importantDetailViewController(_ view: ImportantDetailViewController, didTapCompleteButtonOn reminder: Reminder)
     func importantDetailViewController(_ view: ImportantDetailViewController, didTapImportantButtonOn reminder: Reminder)
     func importantDetailViewController(_ view: ImportantDetailViewController, didTapDeleteButtonOn reminder: Reminder)
@@ -29,7 +29,7 @@ class ImportantDetailViewController: UIViewController {
     private let realm = try! Realm()
     
     // MARK: - Property
-    var delegate: ImportantDetailViewControllerDelegate?
+    weak var delegate: ImportantDetailViewControllerDelegate?
     var reminder: Reminder!
     
     // MARK: - Detail Reminder
@@ -78,6 +78,10 @@ class ImportantDetailViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenKeyboard))
+    }
+    
+    deinit {
+        print("important detail is deinited")
     }
     
     // MARK: - Function set color

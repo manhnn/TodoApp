@@ -36,6 +36,10 @@ class TasksViewController: UIViewController {
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    deinit {
+        print("TASKS IS DEINITED")
+    }
+    
     // MARK: - Get Height keyboard
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {

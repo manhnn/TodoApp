@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TasksDetailViewControllerDelegate {
+protocol TasksDetailViewControllerDelegate: class {
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapCompleteButtonWith reminder: Reminder)
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapImportantButtonWith reminder: Reminder)
     func tasksDetailViewController(_ view: TasksDetailViewController, didTapDeleteButtonWith reminder: Reminder)
@@ -26,7 +26,7 @@ class TasksDetailViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     // MARK: - Property
-    var delegate: TasksDetailViewControllerDelegate?
+    weak var delegate: TasksDetailViewControllerDelegate?
     var reminder: Reminder!
     
     // MARK: - Detail Reminder
@@ -75,6 +75,10 @@ class TasksDetailViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(tapGestureHiddenKeyboard))
+    }
+    
+    deinit {
+        print("TasksDetailViewController is deinited")
     }
     
     // MARK: - Function set color

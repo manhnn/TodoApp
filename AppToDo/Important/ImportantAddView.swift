@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ImportantAddViewDelegate {
+protocol ImportantAddViewDelegate: class {
     func importantAddView(_ view: ImportantAddView, didAddItemSuccessWith reminder: Reminder)
     func importantAddViewDidAddItemFail(_ view: ImportantAddView)
     func importantAddViewDidTapDoneButtonOnKeyboard(_ view: ImportantAddView)
@@ -21,7 +21,11 @@ class ImportantAddView: UIView, UITextFieldDelegate {
     @IBOutlet weak var setDueDateButton: UIButton!
     
     var newReminder = Reminder(id: "", taskName: "", taskScheduledDate: Date(), taskDueDate: Date(timeIntervalSince1970: 0), isComplete: false, isImportant: true, isAddToMyDay: true, txtNote: "Add notes...")
-    public var delegate: ImportantAddViewDelegate?
+    weak var delegate: ImportantAddViewDelegate?
+    
+    deinit {
+        print("important add is deinited")
+    }
 
     // MARK: - Buttons Action
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

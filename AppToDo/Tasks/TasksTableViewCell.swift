@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TasksTableViewCellDelegate {
+protocol TasksTableViewCellDelegate: class {
     func tasksTableViewCell(_ view: TasksTableViewCell, didTapCompleteButtonWith reminder: Reminder)
     func tasksTableViewCell(_ view: TasksTableViewCell, didTapImportantButtonWith reminder: Reminder)
 }
@@ -22,7 +22,7 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var subView: UIView!
     
-    var delegate: TasksTableViewCellDelegate?
+    weak var delegate: TasksTableViewCellDelegate?
     var reminder: Reminder?
     
     override func awakeFromNib() {
@@ -31,6 +31,10 @@ class TasksTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    deinit {
+        print("cell is deinited")
     }
     
     // MARK: - Set color for lblDateTime

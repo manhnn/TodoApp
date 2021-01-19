@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MyDayTableViewCellDelegate {
+protocol MyDayTableViewCellDelegate: class {
     func myDayTableViewCell(_ view: MyDayTableViewCell, didTapCompleteButtonWith reminder: Reminder)
     func myDayTableViewCell(_ view: MyDayTableViewCell, didTapImportantButtonWith reminder: Reminder)
 }
@@ -22,7 +22,7 @@ class MyDayTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var subView: UIView!
     
-    var delegate: MyDayTableViewCellDelegate?
+    weak var delegate: MyDayTableViewCellDelegate?
     var reminder: Reminder?
     
     override func awakeFromNib() {
@@ -31,6 +31,10 @@ class MyDayTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    deinit {
+        print("myday cell is deinited")
     }
     
     // MARK: - Set color for lblDateTime

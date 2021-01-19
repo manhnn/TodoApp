@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PlanMenuViewDelegate {
+protocol PlanMenuViewDelegate: class {
     func planMenuViewDidTapSortByNameButton(_ view: PlanMenuView)
     func planMenuViewDidTapSortByDateTimeButton(_ view: PlanMenuView)
     func planMenuViewDidTapSortByImportantButton(_ view: PlanMenuView)
@@ -15,7 +15,11 @@ protocol PlanMenuViewDelegate {
 
 class PlanMenuView: UIView {
  
-    var delegate: PlanMenuViewDelegate?
+    weak var delegate: PlanMenuViewDelegate?
+    
+    deinit {
+        print("plan menu view is deinited")
+    }
 
     @IBAction func btnSortByNameAction(_ sender: Any) {
         delegate?.planMenuViewDidTapSortByNameButton(self)

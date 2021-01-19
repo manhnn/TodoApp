@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TasksMenuViewDelegate {
+protocol TasksMenuViewDelegate: class {
     func tasksMenuViewDidTapSortByNameButton(_ view: TasksMenuView)
     func tasksMenuViewDidTapSortByDateTimeButton(_ view: TasksMenuView)
     func tasksMenuViewDidTapSortByImportantButton(_ view: TasksMenuView)
@@ -15,7 +15,11 @@ protocol TasksMenuViewDelegate {
 
 class TasksMenuView: UIView {
  
-    var delegate: TasksMenuViewDelegate?
+    weak var delegate: TasksMenuViewDelegate?
+    
+    deinit {
+        print("tasks menu view is deinited")
+    }
 
     @IBAction func btnSortByNameAction(_ sender: Any) {
         delegate?.tasksMenuViewDidTapSortByNameButton(self)

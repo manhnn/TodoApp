@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MyDaySubMenuViewDelegate {
+protocol MyDaySubMenuViewDelegate: class {
     func myDaySubMenuViewDidTapSortByNameButton(_ view: MyDaySubMenuView)
     func myDaySubMenuViewDidTapSortByDateTimeButton(_ view: MyDaySubMenuView)
     func myDaySubMenuViewDidTapSortByImportantButton(_ view: MyDaySubMenuView)
@@ -15,7 +15,11 @@ protocol MyDaySubMenuViewDelegate {
 
 class MyDaySubMenuView: UIView {
 
-    var delegate: MyDaySubMenuViewDelegate?
+    weak var delegate: MyDaySubMenuViewDelegate?
+    
+    deinit {
+        print("my day sub menu view is deinited")
+    }
     
     @IBAction func btnDidTapSortByNameButton(_ sender: Any) {
         delegate?.myDaySubMenuViewDidTapSortByNameButton(self)

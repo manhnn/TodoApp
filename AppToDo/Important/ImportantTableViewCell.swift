@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ImportantTableViewCellDelegate {
+protocol ImportantTableViewCellDelegate: class {
     func importantTableViewCell(_ view: ImportantTableViewCell, didTapCompleteButtonWith reminder: Reminder)
     func importantTableViewCell(_ view: ImportantTableViewCell, didTapImportantButtonWith reminder: Reminder)
 }
@@ -22,7 +22,7 @@ class ImportantTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var subView: UIView!
     
-    var delegate: ImportantTableViewCellDelegate?
+    weak var delegate: ImportantTableViewCellDelegate?
     var reminder: Reminder?
     var myDay: ImportantViewController?
     
@@ -32,6 +32,10 @@ class ImportantTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    deinit {
+        print("important cell is deinited")
     }
     
     // MARK: - Set color for lblDateTime

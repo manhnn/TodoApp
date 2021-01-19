@@ -32,6 +32,9 @@ class PlanViewController: UIViewController {
         addDataToListImportant()
         NotificationCenter.default.addObserver( self, selector: #selector(getKeyboardHeightWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+    deinit {
+        print("plan vc is deinited")
+    }
     
     // MARK: Get Height keyboard
     @objc func getKeyboardHeightWillShow(_ notification: Notification) {

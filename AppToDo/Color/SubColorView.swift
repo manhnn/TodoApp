@@ -7,14 +7,18 @@
 
 import UIKit
 
-protocol SubColorViewDelegate {
+protocol SubColorViewDelegate:AnyObject {
     func subColorViewDidTapSelectImageFromDeviceButton(_ view: SubColorView)
     func subColorViewDidTapSelectColor(_ view: SubColorView)
     func subColorViewDidTapExitButton(_ view: SubColorView)
 }
 
 class SubColorView: UIView  {
-    var delegate: SubColorViewDelegate?
+    weak var delegate: SubColorViewDelegate?
+    
+    deinit {
+        print("subcolor view is deinited")
+    }
     
     @IBAction func selectImageFromDevice(_ sender: Any) {
         delegate?.subColorViewDidTapSelectImageFromDeviceButton(self)
