@@ -87,6 +87,8 @@ class MyDayTableViewCell: UITableViewCell {
         }
         
         self.cellView.layer.cornerRadius = self.cellView.frame.height / 5
+        
+        super.selectionStyle = .none
     }
     
     // MARK: - Buttons Action
